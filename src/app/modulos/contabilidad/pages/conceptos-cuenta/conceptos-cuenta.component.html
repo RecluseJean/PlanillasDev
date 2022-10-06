@@ -1,0 +1,310 @@
+<hr>
+<div>
+    <div [hidden]="empresa!=null">
+        <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            Seleccione una empresa
+        </div>
+    </div>
+    <!-- <div *ngIf="empresa" class="row">
+        <div *ngIf="mostrar" class="col-8" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="crearConcepto()" class="btn btn-sm color-page-button" id="nuevoConcepto" style="width: auto; border-radius: 28px;color: white;">Nuevo concepto planilla</button>
+            </div>
+        </div>
+        <div *ngIf="!mostrar" class="col-8" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="crearCuenta()" class="btn btn-sm color-page-button" id="nuevoCuenta" style="width: auto; border-radius: 28px;color: white;">Nueva cuenta contable</button>
+            </div>
+        </div>
+        <div class="col-4" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="generarReporteCueCon()" class="btn btn-sm color-page-button" id="generarReporte" style="width: auto; border-radius: 28px;color: white;">Generar reporte</button>
+            </div>
+        </div>
+    </div> -->
+    <nav [hidden]="empresa==null">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a (click)="mostrar=true" class="nav-item nav-link active color-page-i" id="nav-concepto-tab" data-toggle="tab" href="#nav-concepto" role="tab" aria-controls="nav-concepto" aria-selected="true" style="font-size: 13px; font-weight: bold;">Concepto planilla</a>
+            <a (click)="mostrar=false" class="nav-item nav-link color-page-i" id="nav-cuenta-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-cuenta" aria-selected="false" style="font-size: 13px; font-weight: bold;">Cuentas contable</a>
+        </div>
+    </nav>
+    <div [hidden]="empresa==null" class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 0px 30px; margin-bottom: 20px;">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-concepto" role="tabpanel" aria-labelledby="nav-concepto-tab">
+                <div class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+                    <div class="col-6" style="margin: 0;">
+                        <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                            <mat-label>Buscar :</mat-label>
+                            <input matInput (keyup)="applyFilter1($event)" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3" style="margin: 0;">
+                        <div class="form-group mt-3 mb-2">
+                            <!--                             <button (click)="crearConcepto()" class="btn btn-sm color-page-button" id="nuevoConcepto" style="width: auto; border-radius: 28px;color: white;">Nuevo concepto planilla</button>
+ --></div>
+                    </div>
+                    <div class="col-3" style="margin: 0;">
+                        <div class="form-group mt-3 mb-2">
+                            <button (click)="configVistaPlame()" class="btn btn-sm color-page-button" id="configVistaPlame" style="width: auto; border-radius: 28px;color: white;">Configurar Vista Plame</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                        <table mat-table [dataSource]="lsconcepto" style="width: 100%;" multiTemplateDataRows>
+                            <ng-container matColumnDef="descripcion">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align:left;"> Descripción </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.sdescripcion}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cuenta_haber_prov">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Cuenta haber provisión </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.cuentaHaberProvision!=null?element.cuentaHaberProvision.icodigoCuenta:"-"}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cuenta_debe_prov">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Cuenta debe provisión </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.cuentaDebeProvision!=null?element.cuentaDebeProvision.icodigoCuenta:"-"}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cuenta_haber_pago">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Cuenta haber pago </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.cuentaHaberPago!=null?element.cuentaHaberPago.icodigoCuenta:"-"}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cuenta_debe_pago">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Cuenta debe pago </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.cuentaDebePago!=null?element.cuentaDebePago.icodigoCuenta:"-"}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="concepto_plame">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Concepto Plame </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.conceptoPlame!=null?element.conceptoPlame.descripcion:"-"}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actualizar">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Actualizar </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                    <i class="mdi mdi-pencil color-page-i" aria-hidden="true" (click)="actualizarConcepto(element)" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </ng-container>
+
+                            <!--                             <ng-container matColumnDef="eliminar">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;">Eliminar </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                    <i class="mdi mdi-delete color-page-i" aria-hidden="true" (click)="eliminarConcepto(element)" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </ng-container> -->
+
+                            <ng-container matColumnDef="expandedDetail">
+                                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                        <div class="form-row col-10" style="margin: 0 auto;">
+                                            <div class="form-row col-12 mb-3 mt-3 mr-3 ml-3">
+                                                <div class="col-sm-12" style="border: 1px solid #d6d6d6; padding:10px; border-radius: 15px;">
+                                                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                                        <thead class="color-page-tr" style="color: white;">
+                                                            <tr>
+                                                                <th class="text-left">Tipo</th>
+                                                                <th class="text-left">Codigo</th>
+                                                                <th class="text-left">Descripción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr style="font-size: 12px">
+                                                                <td class="text-left">Cuenta haber provisión</td>
+                                                                <td class="text-left">{{element.cuentaHaberProvision!=null?element.cuentaHaberProvision.icodigoCuenta:"No asignado"}}</td>
+                                                                <td class="text-left">{{element.cuentaHaberProvision!=null?element.cuentaHaberProvision.sdescripcion:"No asignado"}}</td>
+                                                            </tr>
+                                                            <tr style="font-size: 12px">
+                                                                <td class="text-left">Cuenta debe provisión</td>
+                                                                <td class="text-left">{{element.cuentaDebeProvision!=null?element.cuentaDebeProvision.icodigoCuenta:"No asignado"}}</td>
+                                                                <td class="text-left">{{element.cuentaDebeProvision!=null?element.cuentaDebeProvision.sdescripcion:"No asignado"}}</td>
+                                                            </tr>
+                                                            <tr style="font-size: 12px">
+                                                                <td class="text-left">Cuenta haber pago</td>
+                                                                <td class="text-left">{{element.cuentaHaberPago!=null?element.cuentaHaberPago.icodigoCuenta:"No asignado"}}</td>
+                                                                <td class="text-left">{{element.cuentaHaberPago!=null?element.cuentaHaberPago.sdescripcion:"No asignado"}}</td>
+                                                            </tr>
+                                                            <tr style="font-size: 12px">
+                                                                <td class="text-left">Cuenta debe pago</td>
+                                                                <td class="text-left">{{element.cuentaDebePago!=null?element.cuentaDebePago.icodigoCuenta:"No asignado"}}</td>
+                                                                <td class="text-left">{{element.cuentaDebePago!=null?element.cuentaDebePago.sdescripcion:"No asignado"}}</td>
+                                                            </tr>
+                                                            <tr style="font-size: 12px">
+                                                                <td class="text-left">Concepto Plame</td>
+                                                                <td class="text-left">{{element.conceptoPlame!=null?element.conceptoPlame.codigo:"No asignado"}}</td>
+                                                                <td class="text-left">{{element.conceptoPlame!=null?element.conceptoPlame.descripcion:"No asignado"}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                            <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element"></tr>
+                            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                        </table>
+                        <mat-paginator #paginatorlsconcepto [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        <!-- <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead class="color-page-tr" style="color: white;">
+                                <tr>
+                                    <th class="text-center" colspan="2">Descripcion</th>
+                                    <th class="text-center">Cuenta haber provision</th>
+                                    <th class="text-center">Cuenta debe provision</th>
+                                    <th class="text-center">Cuenta haber pago</th>
+                                    <th class="text-center">Cuenta debe pago</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let concepto of lsconcepto | paginate: { id: 'paginationConcepto', itemsPerPage: numItem, currentPage: pCP }">
+                                <tr style="font-size: 12px">
+                                    <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                        <a *ngIf="concepto.expanded" (click)="concepto.expanded = false;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-up-drop-circle efecctrotate color-page-i" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                        <a *ngIf="!concepto.expanded" (click)="concepto.expanded = true;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-down-drop-circle efecctrotate color-page-i" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">{{concepto.sdescripcion}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil color-page-i" (click)="actualizarConcepto(concepto)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete color-page-i" (click)="eliminarConcepto(concepto)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="concepto.expanded" style="font-size: 12px">
+                                    <td colspan="8">
+                                        <div class="form-row col-12" style="margin: 0 auto;">
+                                            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                                <thead class="color-page-tr" style="color: white;">
+                                                    <tr>
+                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Codigo</th>
+                                                        <th class="text-center">Descripcion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta haber provision</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta debe provision</td>
+                                                        <td class="text-center">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta haber pago</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta debe pago</td>
+                                                        <td class="text-center">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls id="paginationConcepto" (pageChange)="pCP = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls> -->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-cuenta-tab">
+                <div class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+                    <div class="col-6" style="margin: 0;">
+                        <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                            <mat-label>Buscar :</mat-label>
+                            <input matInput (keyup)="applyFilter2($event)" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3" style="margin: 0;">
+                        <div class="form-group mt-3 mb-2">
+                            <!--                             <button (click)="crearCuenta()" class="btn btn-sm color-page-button" id="nuevoCuenta" style="width: auto; border-radius: 28px;color: white;">Nueva cuenta contable</button>
+ --></div>
+                    </div>
+                    <div class="col-3" style="margin: 0;">
+                        <div class="form-group mt-3 mb-2">
+                            <button (click)="generarReporteCueCon()" class="btn btn-sm color-page-button" id="generarReporte" style="width: auto; border-radius: 28px;color: white;">Generar reporte</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 ">
+                    <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                        <table mat-table [dataSource]="lscuenta" style="width: 100%;">
+                            <ng-container matColumnDef="codigo">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Código </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.icodigoCuenta}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="descripcion">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Descripción </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.sdescripcion}}</td>
+                            </ng-container>
+
+                            <!--                             <ng-container matColumnDef="actualizar">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Actualizar </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                    <i class="mdi mdi-pencil color-page-i" aria-hidden="true" (click)="actualizarCuenta(element)" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="eliminar">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Eliminar </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                    <i class="mdi mdi-delete color-page-i" aria-hidden="true" (click)="eliminarCuenta(element)" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </ng-container> -->
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns2" class="color-page-tr"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                        </table>
+                        <mat-paginator #paginatorlscuenta [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </div>
+                    <!-- <div class="table-responsive " style="border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="color: white; " class="color-page-tr">
+                                <tr>
+                                    <th class="text-center">Codigo</th>
+                                    <th class="text-center">Descripcion</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let cuenta of lscuenta | paginate: { id: 'paginationCuenta', itemsPerPage: numItem, currentPage: pCC }">
+                                    <td class="text-center">{{cuenta.icodigoCuenta}}</td>
+                                    <td class="text-center">{{cuenta.sdescripcion}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil color-page-i" (click)="actualizarCuenta(cuenta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete color-page-i" (click)="eliminarCuenta(cuenta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls id="paginationCuenta" (pageChange)="pCC = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

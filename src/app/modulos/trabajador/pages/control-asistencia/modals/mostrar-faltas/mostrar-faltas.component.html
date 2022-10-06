@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h5 class="modal-title">Gestión de Faltas de {{objTrabajadorContrato.trabajador.apePater}} {{objTrabajadorContrato.trabajador.apeMater}} {{objTrabajadorContrato.trabajador.nombres}}</h5>
+    <h3 class="modal-title">PERIODO {{mes.descripcion}} - {{ano.descripcion}}</h3>
+</div>
+<div *ngIf="lsTrabFaltas?.length==0" style="padding: 30px 0px;">
+    <br>
+    <div style="text-align: center; font-size: 18px; margin: 0px 50px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        No cuenta con registro de faltas para el periodo seleccionado
+    </div>
+</div>
+<div *ngIf="lsTrabFaltas?.length>0" class="modal-body">
+    <div class="card example-1 square scrollbar-cyan bordered-cyan">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                    <thead style="background: #ebeff5;">
+                        <tr>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Estado de Justificación</th>
+                            <th class="text-center">Documento</th>
+                            <th class="text-center">Editar</th>
+                            <th class="text-center">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-size: 12px" *ngFor="let falta of lsTrabFaltas">
+                            <td class="text-center">{{falta.fecha | date:'fullDate'}}</td>
+                            <td class="text-center">{{falta.justificado==0?'No Justificado':falta.justificado==1?'Justificado con Documento':'Justificado con permiso'}}</td>
+                            <td class="text-center">
+                                <i *ngIf="!falta.nombreArchivo" class="mdi mdi-cloud-download" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: yellow;" placement="bottom" ngbTooltip="No hay documento"></i>
+                                <i *ngIf="falta.nombreArchivo" (click)="descargarArchivo(falta)" class="mdi mdi-cloud-download" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                            </td>
+                            <td class="text-center">
+                                <i class="mdi mdi-pencil" id="actFalta" (click)="actualizarFalta(falta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                            <td class="text-center">
+                                <i class="mdi mdi-delete" id="elmFalta" (click)="eliminarFalta(falta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" id="nuevo" class="btn btn-info btn-sm min " (click)="nuevaFalta()" style="margin: 0px 5px; ">Registrar Falta</button>
+    <button (click)="close()" id="cerrar" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+</div>

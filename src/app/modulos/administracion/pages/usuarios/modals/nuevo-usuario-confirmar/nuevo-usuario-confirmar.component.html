@@ -1,0 +1,16 @@
+<div class="modal-header color-page-modal" style="padding: 10px 100px;">
+    <h5 class="modal-title" style="font-size: 15px;color: white;">Confirmar</h5>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-row col-12">
+            <div class="col-12 mb-3 mt-3">
+                <h4 style="text-align: center; font-size: 16px;">¿Desea {{obj_usuario.usuario.accion=="U"?'actualizar':obj_usuario.usuario.accion=="D"?'eliminar':'registrar'}} al Usuario?</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button id="cerrar" (click)="close()" type="button " class="btn btn-warning btn-sm min" style="margin: 0px 5px; ">Cancelar</button>
+    <button id="crud" (click)="crud()" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px; ">{{obj_usuario.usuario.accion=="U"?'actualizar':obj_usuario.usuario.accion=="D"?'eliminar':'registrar'}}</button>
+</div>

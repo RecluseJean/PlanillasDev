@@ -1,0 +1,26 @@
+<form #nuevoEquipo="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Nuevo Equipo</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12 mt-3">
+                <div class="col-12 mb-3">
+                    <label for="nomequip">Nombre del Equipo</label>
+                    <input [(ngModel)]="equipo.descripcion" class="form-control form-control-sm" type="text" id="nomequip" name="#equipo.descripcion" maxlength="200" required>
+                </div>
+                <!-- <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="depEmp">Departamento Empresa</label>
+                        <ng-select [items]="lsDepartamentoEmpresa" bindLabel="snombre" bindValue="iidDepartamentoEmpresa" placeholder="Seleccione Departamento Empresa" id="depEmp" name="#departamentoEmpresa.iidDepartamentoEmpresa" [(ngModel)]="departamentoEmpresa.iidDepartamentoEmpresa"
+                            style="width: 100%; margin-right: 10px;" required></ng-select>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" (click)="confirmarNuevoEquipo()" [disabled]="nuevoEquipo.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

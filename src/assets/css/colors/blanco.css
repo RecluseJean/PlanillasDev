@@ -1,0 +1,227 @@
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*Theme Colors*/
+
+
+/*bootstrap Color*/
+
+
+/*Light colors*/
+
+
+/*Normal Color*/
+
+
+/*Extra Variable*/
+
+
+/*******************
+/*Top bar
+*******************/
+
+.topbar {
+    background: #f7f7f7;
+}
+
+.topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
+    display: none;
+}
+
+.topbar .top-navbar .navbar-header .navbar-brand .light-logo {
+    display: inline-block;
+    color: rgba(246, 241, 241, 0.8);
+}
+
+.topbar .navbar-nav .nav-item>a.nav-link {
+    color: rgba(19, 26, 126, 0.8);
+}
+
+.topbar .navbar-nav .nav-item>a.nav-link:hover,
+.topbar .navbar-nav .nav-item>a.nav-link:focus {
+    color: #ffffff !important;
+}
+
+.topbar .top-navbar .navbar-nav>.nav-item>span {
+    color: #ffffff;
+}
+
+.topbar .navbar-header {
+    background: #005689;
+}
+
+.logo-center .topbar .navbar-header {
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.logo-center .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
+    display: none;
+}
+
+.logo-center .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
+    display: inline-block;
+    color: rgba(151, 29, 29, 0.8);
+}
+
+
+/*******************
+/*General Elements
+*******************/
+
+a {
+    color: #028ee1;
+}
+
+a.link:hover,
+a.link:focus {
+    color: #028ee1 !important;
+}
+
+.bg-theme {
+    background-color: #028ee1 !important;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    background-color: #f7f7f7;
+    border-color: #f7f7f7;
+}
+
+.stylish-table tbody tr:hover,
+.stylish-table tbody tr.active {
+    border-left: 4px solid #f7f7f7;
+}
+
+.text-themecolor {
+    color: #028ee1 !important;
+}
+
+.profile-tab li a.nav-link.active,
+.customtab li a.nav-link.active {
+    border-bottom: 2px solid #C8E29D;
+}
+
+
+/*******************
+/*Buttons
+*******************/
+
+.btn-themecolor,
+.btn-themecolor.disabled {
+    background: #f7f7f7;
+    color: #ffffff;
+    border: 1px solid #f7f7f7;
+}
+
+.btn-themecolor:hover,
+.btn-themecolor.disabled:hover {
+    background: #f7f7f7;
+    opacity: 0.7;
+    border: 1px solid #f7f7f7;
+}
+
+.btn-themecolor.active,
+.btn-themecolor:focus,
+.btn-themecolor.disabled.active,
+.btn-themecolor.disabled:focus {
+    background: #028ee1;
+}
+
+
+/*******************
+/*sidebar navigation
+*******************/
+
+.card-no-border .left-sidebar,
+.card-no-border .sidebar-nav {
+    background: #005689;
+}
+
+.mini-sidebar .sidebar-nav {
+    background: transparent;
+}
+
+@media (min-width: 768px) {
+    .mini-sidebar .sidebar-nav #sidebarnav>li>ul {
+        background: #005689;
+    }
+}
+
+.sidebar-nav {
+    background: #005689;
+    color: #f7f7f7;
+}
+
+.user-profile .profile-text a {
+    color: #ffffff !important;
+}
+
+.card-no-border .sidebar-footer {
+    background: #e7edf5;
+}
+
+.sidebar-nav ul li i {
+    size: 12px!important;
+}
+
+.sidebar-nav ul li a {
+    color: #e7edf5;
+}
+
+.sidebar-nav>ul>li>a i {
+    color: #e7edf5;
+    font-size: 15px;
+}
+
+.label-themecolor {
+    background: #f7f7f7;
+}
+
+.sidebar-nav>ul>li.active>a {
+    color: #C8E29D;
+    border-color: #C8E29D;
+}
+
+.sidebar-nav>ul>li.active>a i {
+    color: #C8E29D;
+}
+
+.sidebar-nav ul li a.active,
+.sidebar-nav ul li a:hover {
+    color: #C8E29D;
+}
+
+.sidebar-nav ul li a.active i,
+.sidebar-nav ul li a:hover i {
+    color: #C8E29D;
+}
+
+.sidebar-nav ul li.nav-small-cap {
+    color: #f7f7f7;
+}
+
+@media (min-width: 768px) {
+    .mini-sidebar .sidebar-nav #sidebarnav>li:hover>a {
+        background: #005689;
+        color: #f6f6f2;
+    }
+}

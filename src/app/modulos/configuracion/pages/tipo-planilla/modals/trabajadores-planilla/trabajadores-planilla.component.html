@@ -1,0 +1,83 @@
+<form #formTrabPlan="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;"> Tipo Planilla - {{titulo}}</h5>
+    </div>
+    <nav class="mt-lg-1 mb-1">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-activo" data-toggle="tab" href="#nav-act" role="tab" aria-controls="nav-activo" aria-selected="true" (click)="botonAct=true">Sin Asignar</a>
+            <a class="nav-item nav-link" id="nav-inactivo" data-toggle="tab" href="#nav-inac" role="tab" aria-controls="nav-inactivo" aria-selected="false" (click)="botonAct=false">Asignados</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-act" role="tabpanel" aria-labelledby="nav-act">
+            <div class="col-12">
+                <div [hidden]="lsTrabajadores?.length > 0">
+                    <div style="text-align: center; font-size: 20px; margin: 20px 0px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No hay trabajadores disponibles
+                    </div>
+                </div>
+                <div [hidden]="lsTrabajadores?.length == 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="color: white;" class="color-page-tr">
+                            <tr>
+                                <th class="text-center">Nro Documento</th>
+                                <th class="text-center">Apellidos y Nombre</th>
+                                <th class="text-center">Agregar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-size: 12px" *ngFor="let trab of lsTrabajadores | paginate: { id: 'paginationAgregar', itemsPerPage: 6, currentPage: pA }; let i = index">
+                                <td>{{trab.nroDoc}}</td>
+                                <td>{{trab.apePater}} {{trab.apeMater}} {{trab.nombres}}</td>
+                                <td class="text-center">
+                                    <input class="form-check-input" type="checkbox" [(ngModel)]="trab.estado" (ngModelChange)="validarAgregador($event)" name="checkEstadoTrab" id="input{{i}}" required>
+                                    <label class="form-check-label" for="input{{i}}"></label>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginationAgregar" (pageChange)="pA = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-inac" role="tabpanel" aria-labelledby="nav-inac">
+            <div class="col-12">
+                <div [hidden]="lsTrabajadoresAsignados?.length > 0">
+                    <div style="text-align: center; font-size: 20px; margin: 20px 0px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No hay trabajadores asignados
+                    </div>
+                </div>
+                <div [hidden]="lsTrabajadoresAsignados?.length == 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="color: white;" class="color-page-tr">
+                            <tr>
+                                <th class="text-center">Nro Documento</th>
+                                <th class="text-center">Apellidos y Nombre</th>
+                                <th class="text-center">Quitar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-size: 12px" *ngFor="let trabAsig of lsTrabajadoresAsignados | paginate: { id: 'paginationQuitar', itemsPerPage: 6, currentPage: pQ }; let e = index">
+                                <td>{{trabAsig.trabajador.nroDoc}}</td>
+                                <td>{{trabAsig.trabajador.apePater}} {{trabAsig.trabajador.apeMater}} {{trabAsig.trabajador.nombres}}</td>
+                                <td class="text-center">
+                                    <!-- <div class="form-check form-check-inline"> -->
+                                    <input class="form-check-input" type="checkbox" [(ngModel)]="trabAsig.tipoPlanilla" (ngModelChange)="validarQuitar($event)" name="checkEstadoTrabAsig" id="input_{{e}}">
+                                    <label class="form-check-label" for="input_{{e}}"></label>
+                                    <!-- </div> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginationQuitar" (pageChange)="pQ = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button type="button" (click)="close()" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" *ngIf="botonAct" (click)="agregarTrabajador()" [disabled]="desabilitarAgregar" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Agregar seleccionados</button>
+        <button type="button" *ngIf="!botonAct" (click)="quitarTrabajador()" [disabled]="desabilitarQuitar" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Quitar deseleccionados</button>
+    </div>
+</form>

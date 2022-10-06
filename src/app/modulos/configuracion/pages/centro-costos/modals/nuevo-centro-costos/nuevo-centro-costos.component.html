@@ -1,0 +1,19 @@
+<form #ngCenCos="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{centroCostos.accion=="U"?'Actualizar':'Registrar'}} Centro Costos</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12 mt-3">
+                <div class="col-12 mb-3">
+                    <label for="nomcencos">Nombre Centro Costos</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="centroCostos.descripcion" name="#centroCostos.descripcion" type="text" maxlength="45" id="nomcencos" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoCentroCostos()" [disabled]="ngCenCos.form.invalid" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

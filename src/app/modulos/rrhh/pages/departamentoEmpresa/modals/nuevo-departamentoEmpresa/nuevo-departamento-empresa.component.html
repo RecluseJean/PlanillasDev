@@ -1,0 +1,25 @@
+<form #nuevoDepEmp="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{departamentoEmpresa.accion=="U"?'Actualizar':'Registrar'}} Departamento Empresa</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="nomdepEmp">Nombre Departamento</label>
+                    <input [(ngModel)]="departamentoEmpresa.snombre" class="form-control form-control-sm" type="text" id="nomdepEmp" name="#departamentoEmpresa.snombre" maxlength="255" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="ger">Gerente</label>
+                    <ng-select [items]="lsGerente" bindLabel="nombres" bindValue="idTrabajador" placeholder="Seleccione Gerente" id="ger" name="#trabajador.idTrabajador" [(ngModel)]="trabajador.idTrabajador" style="width: 100%; margin-right: 10px;"></ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoDepartamentoEmpresa()" type="button" [disabled]="nuevoDepEmp.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

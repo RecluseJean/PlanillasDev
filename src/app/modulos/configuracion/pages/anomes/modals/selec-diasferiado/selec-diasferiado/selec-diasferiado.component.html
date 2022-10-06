@@ -1,0 +1,57 @@
+<form #selecFrdo="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">Días feriados de {{mes.descripcion}}</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row" style="margin-top: 3%;">
+            <div class="form-row col-12">
+                <div class="col-8 mb-3">
+                    <label for="diafrdo">Dia</label>
+                    <ejs-datepicker format='dd/MM' type="datepicker" id="diafrdo" placeholder='Elige un dia' [(ngModel)]="fecha" name="#fecha" [strictMode]='true' [min]='minDate' [max]='maxDate' required> </ejs-datepicker>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="btnfrd">Nuevo</label>
+                    <button (click)="guardarCambios()" id="btnfrd" type="button" [disabled]="selecFrdo.form.invalid || lsFeriados.length>=mes.diasFeriadoCalend" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Registrar</button>
+                </div>
+            </div>
+            <div class="form-row col-12" *ngIf="lsFeriados.length>=mes.diasFeriadoCalend">
+                <div class="col-12 mb-3 alert alert-primary" role="alert">¡Maximo de días feriados registrados alcanzado¡</div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="form-row col-12">
+                <div *ngIf="lsFeriados.length<=0; else tabla">
+                    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text justify-content-center">No hay días feriados registrados para este mes</p>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #tabla>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center">Día del mes</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let dia of lsFeriados">
+                                    <td class="text-center font-18">Día: {{dia}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete" (click)="eliminarFeriado(dia)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Salir</button>
+    </div>
+</form>

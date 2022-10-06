@@ -1,0 +1,216 @@
+<hr>
+<div [hidden]="empresa!=null">
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+
+<nav [hidden]="empresa==null">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active color-page-i" id="nav-planilla-tab" data-toggle="tab" href="#nav-planilla" role="tab" aria-controls="nav-planilla" aria-selected="true" style="font-size: 13px; font-weight: bold;">Planillas</a>
+        <a class="nav-item nav-link color-page-i" id="nav-honorario-tab" data-toggle="tab" href="#nav-honorario" role="tab" aria-controls="nav-honorario" aria-selected="false" style="font-size: 13px; font-weight: bold;">Recibos Por Honorarios</a>
+    </div>
+</nav>
+<div [hidden]="empresa==null" class="card-body" style="border-radius: 10px; padding: 30px; margin-bottom: 20px;">
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-planilla" role="tabpanel" aria-labelledby="nav-planilla-tab">
+            <div [hidden]="empresa==null" class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+
+                <div class="col-12" style="margin: 0;">
+                    <!-- <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SearchOptions" id="numDoc" (click)="checkAction(); filterPost=''" checked>
+                            <label class="form-check-label" for="numDoc" style="font-size: 12px">Buscar por Número Documento</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SearchOptions" id="nomCmp" (click)="checkAction(); filterPost=''">
+                            <label class="form-check-label" for="nomCmp" style="font-size: 12px">Buscar por Nombre</label>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control form-control-sm min" spellcheck="false" id="inputGeneral" type="text" [(ngModel)]="filterPost" (click)="filterPost=''; pP=1; pR=1" placeholder="{{mostrarPH}}" style="border-radius: 28px">
+                        </div>-->
+                    <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                        <mat-label>Buscar...</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" #input>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <!-- <div [hidden]="lsTrabajadorPlanilla?.length > 0">
+                    <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No hay registro de trabajadores
+                    </div>
+                </div> -->
+                <div [hidden]="lsTrabajadorPlanilla?.length == 0" class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                    <table mat-table [dataSource]="lsTrabajadorPlanilla" style="width: 100%;">
+
+                        <ng-container matColumnDef="nomdoc">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff;"> Número Documento </th>
+                            <td mat-cell *matCellDef="let element">{{element.trabajador.nroDoc}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apenom">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff;"> Apellidos y Nombres</th>
+                            <td mat-cell *matCellDef="let element">{{element.trabajador.apePater}} {{element.trabajador.apeMater}} {{element.trabajador.nombres}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisasist">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Asistencias </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-check mostrarAsist color-page-i" (click)="mostrarRegistroAsistencias(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisfalt">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Faltas </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-remove mostrarFalt color-page-i" (click)="mostrarRegistroFaltas(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisperm">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Permisos </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-clock mostrarPerm color-page-i" (click)="mostrarRegistroPermisos(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator #paginatorlsTrabajadorPlanilla [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    <!-- <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center">Numero Documento</th>
+                                <th class="text-center">Apellidos y Nombre</th>
+                                <th class="text-center">Registro de Asistencias</th>
+                                <th class="text-center">Registro de Faltas</th>
+                                <th class="text-center">Registro de Permisos</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let trab of lsTrabajadorPlanilla | filter :filterPost :filterBoolean | paginate: { id: 'paginationPlanilla', itemsPerPage: numItem, currentPage: pP }">
+                            <tr style="font-size: 12px ">
+                                <td class="text-center">{{trab.trabajador.nroDoc}}</td>
+                                <td>{{trab.trabajador.apePater}} {{trab.trabajador.apeMater}} {{trab.trabajador.nombres}}</td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-check mostrarAsist" (click)="mostrarRegistroAsistencias(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-remove mostrarFalt" (click)="mostrarRegistroFaltas(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-clock mostrarPerm" (click)="mostrarRegistroPermisos(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginationPlanilla" (pageChange)="pP = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade " id="nav-honorario" role="tabpanel" aria-labelledby="nav-honorario-tab">
+            <div [hidden]="empresa==null" class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+                <div class="col-12" style="margin: 0;">
+
+                    <!-- <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SearchOptions" id="numDoc" (click)="checkAction(); filterPost=''" checked>
+                            <label class="form-check-label" for="numDoc" style="font-size: 12px">Buscar por Número Documento</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="SearchOptions" id="nomCmp" (click)="checkAction(); filterPost=''">
+                            <label class="form-check-label" for="nomCmp" style="font-size: 12px">Buscar por Nombre</label>
+                        </div>
+                        <div class="col-10" style="margin-left: 2%;">
+                            <input class="form-control form-control-sm min" spellcheck="false" id="inputGeneral" type="text" [(ngModel)]="filterPost" (click)="filterPost=''; pP=1 ; pR=1" placeholder="{{mostrarPH}}" style="border-radius: 28px">
+                        </div> -->
+                    <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                        <mat-label>Buscar...</mat-label>
+                        <input matInput (keyup)="applyFilter2($event)" #input>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- <div [hidden]="lsTrabajadorHonorario?.length > 0">
+                    <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No hay registro de trabajadores
+                    </div>
+                </div> -->
+
+                <div [hidden]="lsTrabajadorHonorario?.length == 0" class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                    <table mat-table [dataSource]="lsTrabajadorHonorario" style="width: 100%;">
+
+                        <ng-container matColumnDef="nomdoc">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff;"> Número Documento </th>
+                            <td mat-cell *matCellDef="let element">{{element.trabajador.nroDoc}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apenom">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff;"> Apellidos y Nombres</th>
+                            <td mat-cell *matCellDef="let element">{{element.trabajador.apePater}} {{element.trabajador.apeMater}} {{element.trabajador.nombres}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisasist">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Asistencias </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-check mostrarAsist color-page-i" (click)="mostrarRegistroAsistencias(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisfalt">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Faltas </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-remove mostrarFalt color-page-i" (click)="mostrarRegistroFaltas(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="regisperm">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Registro de Permisos </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                                <i class="mdi  mdi-calendar-clock mostrarPerm color-page-i" (click)="mostrarRegistroPermisos(element)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator #paginatorlsTrabajadorHonorario [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    <!-- <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5; ">
+                            <tr>
+                                <th class="text-center">Numero Documento</th>
+                                <th class="text-center">Apellidos y Nombre</th>
+                                <th class="text-center">Registro de Asistencias</th>
+                                <th class="text-center">Registro de Faltas</th>
+                                <th class="text-center">Registro de Permisos</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let trab of lsTrabajadorHonorario | filter :filterPost :filterBoolean | paginate: { id: 'paginationRecibo', itemsPerPage: numItem, currentPage: pR }">
+                            <tr style="font-size: 12px">
+                                <td class="text-center">{{trab.trabajador.nroDoc}}</td>
+                                <td>{{trab.trabajador.apePater}} {{trab.trabajador.apeMater}} {{trab.trabajador.nombres}}</td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-check mostrarAsist" (click)="mostrarRegistroAsistencias(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-remove mostrarFalt" (click)="mostrarRegistroFaltas(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                                <td class="text-center ">
+                                    <i class="mdi  mdi-calendar-clock mostrarPerm" (click)="mostrarRegistroPermisos(trab)" aria-hidden="true" style="cursor: pointer; font-size: 30px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls id="paginationRecibo" (pageChange)="pR = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls> -->
+                </div>
+            </div>
+            < </div>
+
+
+        </div>
+    </div>

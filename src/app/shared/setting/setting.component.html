@@ -1,0 +1,100 @@
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<div class="right-sidebar">
+    <div class="slimscrollright">
+        <div class="rpanel-title "> CONFIGURACIÓN <span><i class="ti-close right-side-toggle"></i></span> </div>
+        <div class="r-panel-body" style="padding: 5px;">
+            <!-- <ul id="themecolors" class="m-t-20">
+                <li><b></b></li>
+                <li><a #link1 (click)="cambiarColor('blanco', link1 )" data-theme="default" class=" right-side-toggle selector blue-dark-theme">1</a></li>
+                <li><a #link2 (click)="cambiarColor('green', link2 )" data-theme="green" class=" right-side-toggle selector green-theme">2</a></li>
+                <li><a #link3 (click)="cambiarColor('purple', link3 )" data-theme="purple" class="right-side-toggle selector purple-theme">3</a></li>
+                <li><a #link4 (click)="cambiarColor('default', link4 )" data-theme="default" class="right-side-toggle selector default-theme">4</a></li>
+            </ul> -->
+            <div class="col-12" style="padding: 0px;">
+                <h5 style="margin-left: 8px; height: 25px;">
+                    <!-- <i-feather name="droplet"></i-feather> -->
+                    <span style="font-size: 15px; position: absolute; top: 8px; margin-left: 7px; font-weight: normal;">Opcion de Colores - Menú Lateral</span>
+                </h5>
+                <div class="col-12 row" style="margin: 0; padding: 0; height: 35px;">
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link1 (click)="cambiarColor('color-deg1', link1 )" data-theme="color-deg1" class="selector color-deg1-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link2 (click)="cambiarColor('color-deg2', link2 )" data-theme="color-deg2" class="selector color-deg2-theme ">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link3 (click)="cambiarColor('color-deg3', link3 )" data-theme="color-deg3" class="selector color-deg3-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link4 (click)="cambiarColor('color-deg4', link4 )" data-theme="color-deg4" class="selector color-deg4-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link5 (click)="cambiarColor('color-deg5', link5 )" data-theme="color-deg5" class="selector color-deg5-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link6 (click)="cambiarColor('color-deg6', link6 )" data-theme="color-deg6" class="selector color-deg6-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link7 (click)="cambiarColor('color-deg7', link7 )" data-theme="color-deg7" class="selector color-deg7-theme">
+                    </div>
+                </div>
+                <div class="col-12 row" style="margin: 0; padding: 0; margin-top: 13px; margin-bottom: 25px; height: 35px;">
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link8 (click)="cambiarColor('color-solid1', link8 )" data-theme="color-solid1" class="selector color-solid1-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link9 (click)="cambiarColor('color-solid2', link9 )" data-theme="color-solid2" class="selector color-solid2-theme ">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link10 (click)="cambiarColor('color-solid3', link10 )" data-theme="color-solid3" class="selector color-solid3-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link11 (click)="cambiarColor('color-solid4', link11 )" data-theme="color-solid4" class="selector color-solid4-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link12 (click)="cambiarColor('color-solid5', link12 )" data-theme="color-solid5" class="selector color-solid5-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link13 (click)="cambiarColor('color-solid6', link13 )" data-theme="color-solid6" class="selector color-solid6-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;" #link14 (click)="cambiarColor('color-solid7', link14 )" data-theme="color-solid7" class="selector color-solid7-theme">
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-12" style="margin-top: 15px; margin-bottom: 40px; padding: 1px;">
+                <h5 style="margin-left: 8px; height: 25px;">
+                    <span style="font-size: 15px; position: absolute; top: 8px; margin-left: 7px; font-weight: normal;">Opcion de Imagenes - Menú Lateral</span>
+                </h5>
+                <div class="col-12 row" style="margin: 0; padding: 0;">
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link15 (click)="cambiarImage('sidebar1', link15 )" data-theme="sidebar1" class="selector sidebar1-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link16 (click)="cambiarImage('sidebar2', link16 )" data-theme="sidebar2" class="selector sidebar2-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link17 (click)="cambiarImage('sidebar3', link17 )" data-theme="sidebar3" class="selector sidebar3-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link18 (click)="cambiarImage('sidebar4', link18 )" data-theme="sidebar4" class="selector sidebar4-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link19 (click)="cambiarImage('sidebar5', link19 )" data-theme="sidebar5" class="selector sidebar5-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link20 (click)="cambiarImage('sidebar6', link20 )" data-theme="sidebar6" class="selector sidebar6-theme">
+                    </div>
+                    <div style="margin: 0px 7px; width: 35px; height: 70px; border-radius: 8px; cursor: pointer;" #link21 (click)="cambiarImage('sidebar7', link21 )" data-theme="sidebar7" class="selector sidebar7-theme">
+                    </div>
+                </div>
+            </div> -->
+
+
+
+            <!-- 
+            <ul class="m-t-20 chatonline">
+                <li><b>Seleccionar Módulo</b></li>
+
+                <div class="chat-left-inner">
+
+                    <ul class="chatonline style-none ">
+                        <li *ngFor="let mod of menuModulos" class="active pointer">
+                            <a href="#" [ngClass]="{'right-side-toggle':block}" (click)="cargarOpcionesModulo(mod.idagrupadormodulos,mod.nombre)"> <span>{{mod.nombre}} </span></a>
+                        </li>
+
+                        <li class="p-20"></li>
+                    </ul>
+                </div>
+
+            </ul>
+            -->
+
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->

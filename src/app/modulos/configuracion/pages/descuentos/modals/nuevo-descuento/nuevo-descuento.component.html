@@ -1,0 +1,27 @@
+<form #formDsct="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{descuento.accion=="U"?'Actualizar':'Registrar'}} Descuento</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-6 mb-3">
+                    <label for="nomdsct">Nombre:</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="nomdsct" [(ngModel)]="descuento.descripcion" name="#descuento.descripcion" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="tdsct">Tipo Descuento :</label>
+                    <ng-select [items]="lsTipoDsct" bindLabel="descripcion" bindValue="id" [(ngModel)]="idTipoDsct" name="#idTipoDsct" placeholder="Seleccione un tipo de descuento" id="tdsct" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+                <div class="col-6 mb-3" *ngIf="idTipoDsct==1">
+                    <label for="monto">Monto :</label>
+                    <input class="form-control form-control-sm" type="number" id="monto" [(ngModel)]="descuento.montoFijo" name="#descuento.montoFijo" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button type="button" (click)="close()" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" [disabled]="formDsct.form.invalid" (click)="confirmar()" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Confirmar</button>
+    </div>
+</form>

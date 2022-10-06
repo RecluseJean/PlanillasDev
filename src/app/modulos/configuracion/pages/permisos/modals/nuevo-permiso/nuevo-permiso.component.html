@@ -1,0 +1,31 @@
+<form #nuevoPermiso="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{permiso.accion=="U"?'Actualizar':'Registrar'}} Tipo de Permiso</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="desc">Descripción del tipo</label>
+                    <input [(ngModel)]="permiso.descripcion" class="form-control form-control-sm" type="text" maxlength="255" id="desc" name="#permiso.descripcion" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="dias">Días de Permiso</label>
+                    <input [(ngModel)]="permiso.diasPermiso" class="form-control form-control-sm" type="number" id="dias" name="#permiso.diasPermiso" (keypress)="verificarNumero($event)" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="estad">Estado:</label>
+                    <ng-select [items]="lsEstado" bindLabel="descripcion" bindValue="valor" id="estad" [(ngModel)]="permiso.estado" name="#permiso.estado" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoTipoPermiso()" type="button" [disabled]="nuevoPermiso.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

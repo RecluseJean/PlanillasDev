@@ -1,0 +1,77 @@
+<div class="modal-body">
+    <div class="row col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 10px 5px;">
+        <div class="col-4">
+            <label for id="btnbus">Buscar RHE: </label>
+            <button type="button" (click)="BuscarRHE()" id="btnbus" class="btn btn-info btn-sm min" style="margin: 0px 5px; width: 100%; height: 30px;">Buscar</button>
+        </div>
+        <div class="col-4">
+            <label for="año">Año:</label>
+            <ng-select style="width: 100%;" [items]="lsAno" bindLabel="descripcion" id="año" name="#ano.idPdoAno" bindValue="idPdoAno" placeholder="seleccione" [(ngModel)]="ano.idPdoAno"></ng-select>
+        </div>
+        <div class="col-4">
+            <label for id="mes">Mes:</label>
+            <ng-select style="width: 100%;" [items]="lsMeses" bindLabel="descripcion" id="mes" name="#mes.idPdoMes" bindValue="idPdoMes" placeholder="seleccione" [(ngModel)]="mes.idPdoMes"></ng-select>
+        </div>
+
+    </div>
+
+    <div class="col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px; flex: 0 0 98%; margin: 10px 5px;">
+        <div class="col-12 row" style="margin: 0;">
+            <div class="form-group col-8 mb-3" style="margin-top: 10px;">
+                <h5 class="modal-title">Recibo por Honorarios - ultimos 5 meses</h5>
+            </div>
+            <!-- <div class="form-group col-3 mb-3">
+                <button class="btn btn-sm btn-info" style="width: 80%; border-radius: 28px;"> Nuevo RHE
+                  <input type="file" (change)="subirArchivo($event)" accept="application/pdf"
+                    class="form-control form-control-sm"
+                    style="width:80%; position:absolute; height:10px; left:0px; opacity:0; transform: translateX(15px)">
+                </button>
+            </div> -->
+        </div>
+        <div *ngIf="lsRhe?.length == 0" class="alert alert-info">
+            <div>
+                No cuenta con RHEs registrados
+            </div>
+        </div>
+        <div *ngIf="lsRhe?.length > 0" class="table-responsive">
+            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                <thead style="background: #ebeff5;">
+                    <tr>
+                        <th class="text-center">Mes</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-center">Boleta</th>
+                        <th class="text-center">Descargar</th>
+                        <th class="text-center">Adjuntar</th>
+                        <th class="text-center">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 12px" *ngFor="let rhe of lsRhe">
+                        <td>{{rhe.pdoMes.descripcion}}</td>
+                        <td>{{rhe.pdoAno.descripcion}}</td>
+                        <td class="text-center">
+                          <i class="mdi mdi-cloud-download" (click)="descargarBoleRHE(rhe)" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                        </td>
+                        <td class="text-center">
+                            <i *ngIf="rhe.nombreArchivo != null" class="mdi mdi-cloud-download" (click)="descargarRHE(rhe)" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                            <i *ngIf="rhe.nombreArchivo == null" class="mdi mdi-cloud-download" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: yellow;"></i>
+                        </td>
+                        <td class="text-center" *ngIf="rhe.nombreArchivo != null">
+                            <i class="mdi mdi-cloud-upload" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                        </td>
+                        <td class="text-center" *ngIf="rhe.nombreArchivo == null">
+                            <input class="form-control form-control-sm input-icon-z" type="file" (change)="subirArchivo($event, rhe)" accept=".pdf">
+                            <i class="mdi mdi-cloud-upload icon-z parpadea" aria-hidden="true" style="color: yellow;"></i>
+                        </td>
+                        <td class="text-center">
+                            <i class="mdi mdi-delete" (click)="eliminarRHE(rhe)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+</div>

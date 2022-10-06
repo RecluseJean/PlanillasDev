@@ -1,0 +1,66 @@
+<form #nuevaSugerencia="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h2 class="modal-title text-center" style="color: white;">{{input_horario_final==null?"Nueva":"Actualizar"}} Sugerencia</h2>
+    </div>
+
+    <div class="modal-body">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="col-12 mr-3" style="border:1px solid #d6d6d6; border-radius:15px; padding:10px 10px;">
+                <div class="form-row col-12" style="padding-top: 10px;">
+                    <div class="col-4 mb-3">
+                        <label for="nom">Nombres:</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="comentario" rows="3" style="margin-left: -15px; width: 100%; height: 10px;" [(ngModel)]="sugerencias.nombres" name=#sugerencias.nombres required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-5 mb-3">
+                        <label for="ape">Apellidos:</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="comentario" rows="3" style="margin-left: -15px; width: 100%; height: 10px;" [(ngModel)]="sugerencias.apellidos" name=#sugerencias.apellidoos required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-3 mb-3">
+                        <label for="fec_pub">Fecha Publicación</label>
+                        <ejs-datepicker format='dd-MM-yyyy' type="datepicker" placeholder='Elige una fecha' [(ngModel)]="sugerencias.fecPub" name="#sugerencias.fecPub" required> </ejs-datepicker>
+                    </div>
+
+
+                </div>
+                <div class="form-row col-12" style="padding-top: 10px;">
+                    <div class="col-8 mb-">
+                        <label for="asunto">Asunto</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="comentario" rows="3" style="margin-left: -15px; width: 575px; height: 10px;" [(ngModel)]="sugerencias.asunto" name=#sugerencias.asunto required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-4 mb-3">
+                        <label for="areaDep">Area:</label>
+                        <ng-select [items]="lsDepartamentoEmpresa" bindLabel="snombre" bindValue="iidAreaDepartamentoEmpresa" id="areaDep" [(ngModel)]="iidAreaDepartamentoEmpresa" name="#iidAreaDepartamentoEmpresa" style="width: 100%; margin-right: 10px;" required></ng-select>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row col-12" style="padding-top: 20px;">
+                    <div class="col-12 mb-6">
+                        <label for="desc">Descripción</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="comentario" rows="12" style="height: 150px; width: 860px; margin-left: -15px;" [(ngModel)]="sugerencias.descripcion" name=#sugerencias.descripcion></textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" id="cerrar" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" id="confirmar" class="btn btn-info btn-sm min" [disabled]="nuevaSugerencia.form.invalid" (click)="confirmarNuevaSugerencia()" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

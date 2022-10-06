@@ -1,0 +1,110 @@
+<hr>
+<div class="card-body" style="border-radius: 10px; padding: 0px 30px; margin-bottom: 20px;">
+    <div class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+        <div class="col-6" style="margin: 0;">
+            <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                <mat-label>Buscar...</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <!-- <div class="col-6" style="margin: 0;">
+            <div class="form-group mt-3 mb-2">
+                <button class="btn btn-sm color-page-tr" id="nuevo" (click)="nuevoUsuario()" style="width: auto; border-radius: 28px;color: #ffffff;">Nuevo Usuario</button>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="col-12">
+        <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+            <table mat-table [dataSource]="lsUsuarios" style="width: 100%;">
+
+                <ng-container matColumnDef="nomusu">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: left;"> Nombre de Usuario </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">{{element.username}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="correo">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: left;"> Correo </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">{{element.email}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="rol">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: left;"> Rol </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">{{element.perfil.nombres}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Estado </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.estado==1?'ACTIVO':'INACTIVO'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actualizar">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Actualizar </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <i class="fa fa-pencil-square-o color-page-i" (click)="actualizarUsuario(element)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="cambcontra">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Cambiar Contraseña </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <i *ngIf="!(element.perfil.idPerfil == 1 || element.perfil.idPerfil == 2)" class="fa fa-lock color-page-i" (click)="actualizarContra(element)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="reestacontra">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Reestablecer Contraseña </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <!--  <i *ngIf="!(element.perfil.idPerfil == 1 || element.perfil.idPerfil == 2)" class="fa fa-lock color-page-i" (click)="actualizarContra(element)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i> -->
+                        <button (click)="reestablecerContra(element)" *ngIf="!(element.perfil.idPerfil == 1 || element.perfil.idPerfil == 2)" class="btn btn-sm color-page-button" id="reestaContra" style="width: auto; border-radius: 28px;color: white;">Reestablecer Contraseña</button>
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="eliminar">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: normal; font-size: 12px; color: #ffffff;"> Eliminar </th>
+                <td mat-cell *matCellDef="let element">
+                    <i class="fa fa-trash color-page-i" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                </td>
+            </ng-container> -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <mat-paginator [pageSize]="itemsPerPage" [pageSizeOptions]="[5, 10, 20]" [length]="total_productos" (page)="pageEvent = paginatorFunc($event)" showFirstLastButtons></mat-paginator> -->
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Nombre de Usuario</th>
+                    <th class="text-center">Correo</th>
+                    <th class="text-center">Rol</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Cambiar Contraseña</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let usuario of lsUsuarios | paginate: { id: 'paginationUsuario', itemsPerPage: numItem, currentPage: pA }">
+                <tr style="font-size: 12px">
+                    <td>{{usuario.username}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.perfil.nombres}}</td>
+                    <td>{{usuario.estado?'ACTIVO':'INACTIVO'}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" id="actusu" (click)="actualizarUsuario(usuario)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-key-change" id="actpass" (click)="actualizarContra(usuario)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls id="paginationUsuario" (pageChange)="pA = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+</div> -->

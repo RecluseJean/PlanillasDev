@@ -1,0 +1,23 @@
+<form #formGeneratTxt="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Generar consolidado {{tpoPlan==null?'general':tpoPlan.categoriaPlanilla==4?' 4ta':' 5ta'}}</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-6 mb-3">
+                    <label for="cuecargo">Seleccione Año :</label>
+                    <ng-select style="width: 100%;" [items]="lsAno" bindLabel="descripcion" id="año" name="#ano.idPdoAno" bindValue="idPdoAno" placeholder="seleccione" [(ngModel)]="ano.idPdoAno"></ng-select>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="descr">Seleccione Mes :</label>
+                    <ng-select style="width: 100%;" [items]="lsMeses" bindLabel="descripcion" id="mes" name="#mes.idPdoMes" bindValue="idPdoMes" placeholder="seleccione" [(ngModel)]="mes.idPdoMes"></ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="generar()" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Generar</button>
+    </div>
+</form>

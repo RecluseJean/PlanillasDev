@@ -1,0 +1,173 @@
+<div class="modal-header">
+    <h5 class="modal-title">Gestión Derechos Habientes</h5>
+</div>
+<nav class="mt-lg-1 mb-1">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-activo" data-toggle="tab" href="#nav-act" role="tab" aria-controls="nav-activo" aria-selected="true">Activo</a>
+        <a class="nav-item nav-link" id="nav-inactivo" data-toggle="tab" href="#nav-inac" role="tab" aria-controls="nav-inactivo" aria-selected="false">Inactivo</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-act" role="tabpanel" aria-labelledby="nav-act">
+        <div class="col-12">
+            <div *ngIf="lsDerHabReg?.length == 0">
+                <br>
+                <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                    No cuenta con derecho habientes registrados
+                </div>
+            </div>
+            <div *ngIf="lsDerHabReg?.length > 0" class="table-responsive">
+                <div class="card example-2 square scrollbar-cyan bordered-cyan" style="overflow-x: hidden;">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center" colspan="2">Apellidos y Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Fecha Nacimiento</th>
+                                <th class="text-center">Descargar Archivo</th>
+                                <th class="text-center">Subir Archivo</th>
+                                <th class="text-center">Dar Baja</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let derhab of lsDerHabReg">
+                            <tr style="font-size: 12px">
+                                <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                    <a *ngIf="derhab.expanded" (click)="derhab.expanded = false;" class="efecctrotatecont">
+                                        <i class="mdi mdi-arrow-up-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                    </a>
+                                    <a *ngIf="!derhab.expanded" (click)="derhab.expanded = true;" class="efecctrotatecont">
+                                        <i class="mdi mdi-arrow-down-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">{{derhab.apellido}} {{derhab.nombre}}</td>
+                                <td class="text-center">
+                                    {{derhab.tipoDerechoHabiente==1?"Cónyugue":derhab.tipoDerechoHabiente==2?"Hijo incapacitado completamente":"Madre gestante"}}
+                                </td>
+                                <td class="text-center">{{derhab.fechaNac| date :'dd-MM-yyyy'}}</td>
+                                <td class="text-center">
+                                    <i *ngIf="derhab.nombreArchivo != null" class="mdi mdi-cloud-download" (click)="descargarArchivo(derhab)" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                                    <i *ngIf="derhab.nombreArchivo == null" class="mdi mdi-cloud-download" aria-hidden="true" style="cursor: pointer; font-size: 25px; ; color: yellow;"></i>
+                                </td>
+                                <td class="text-center">
+                                    <div *ngIf="derhab.nombreArchivo==null">
+                                        <!-- <input class="form-control form-control-sm input-icon-z" type="file" (change)="subirArchivo($event,derhab)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,imagemage/png, image/jpeg"> -->
+                                        <i class="mdi mdi-cloud-upload icon-z parpadea" aria-hidden="true" (click)="regisArchivo(derhab)"></i>
+                                    </div>
+                                    <div *ngIf="derhab.nombreArchivo!=null">
+                                        <!-- <input class="form-control form-control-sm input-icon-z" type="file" (change)="subirArchivo($event,derhab)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,imagemage/png, image/jpeg"> -->
+                                        <i class="mdi mdi-cloud-upload icon-z" aria-hidden="true" (click)="regisArchivo(derhab)"></i>
+                                    </div>
+                                    <!-- <i *ngIf="derhab.nombreArchivo!=null" class="mdi mdi-cloud-upload icon-z" aria-hidden="true"></i> -->
+                                </td>
+                                <td class="text-center">
+                                    <i class="mdi mdi-account-remove" (click)="openModalConfirmar(derhab)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="derhab.expanded" style="font-size: 12px">
+                                <td colspan="7">
+                                    <div class="form-row col-12" style="margin: 0 auto;">
+                                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                            <thead style="background: #ebeff5;">
+                                                <tr>
+                                                    <th class="text-center">Correo</th>
+                                                    <th class="text-center">CUSPP</th>
+                                                    <th class="text-center">Fecha Inicio</th>
+                                                    <th class="text-center">Fecha Fin</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="font-size: 12px">
+                                                    <td class="text-center">{{derhab.correo}}</td>
+                                                    <td class="text-center">{{derhab.nroCuspp}}</td>
+                                                    <td class="text-center">{{derhab.fechaInicio| date :"dd-MM-yyyy"}}</td>
+                                                    <td class="text-center">{{derhab.fechaFin| date :"dd-MM-yyyy"}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-inac" role="tabpanel" aria-labelledby="nav-inac">
+        <div class="col-12">
+            <div *ngIf="lsDerHabInac?.length == 0">
+                <br>
+                <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                    No cuenta con derecho habientes inactivos
+                </div>
+            </div>
+            <div *ngIf="lsDerHabInac?.length > 0" class="table-responsive">
+                <div class="card example-2 square scrollbar-cyan bordered-cyan" style="overflow-x: hidden;">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center" colspan="2">Apellidos y Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Fecha Nacimiento</th>
+                                <th class="text-center">Descargar Archivo</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let derHabInac of lsDerHabInac">
+                            <tr style="font-size: 12px">
+                                <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                    <a *ngIf="derHabInac.expanded" (click)="derHabInac.expanded = false;" class="efecctrotatecont">
+                                        <i class="mdi mdi-arrow-up-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                    </a>
+                                    <a *ngIf="!derHabInac.expanded" (click)="derHabInac.expanded = true;" class="efecctrotatecont">
+                                        <i class="mdi mdi-arrow-down-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">{{derHabInac.apellido}} {{derHabInac.nombre}}</td>
+                                <td class="text-center">
+                                    {{derHabInac.tipoDerechoHabiente==1?"Cónyugue":derHabInac.tipoDerechoHabiente==2?"Hijo incapacitado completamente":"Madre gestante"}}
+                                </td>
+                                <td class="text-center">{{derHabInac.fechaNac| date :'dd-MM-yyyy'}}</td>
+                                <td class="text-center">
+                                    <i *ngIf="derHabInac.nombreArchivo != null" class="mdi mdi-cloud-download" (click)="descargarArchivo(derHabInac)" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: green;"></i>
+                                    <i *ngIf="derHabInac.nombreArchivo == null" class="mdi mdi-cloud-download" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: yellow;"></i>
+                                </td>
+                            </tr>
+                            <tr *ngIf="derHabInac.expanded" style="font-size: 12px">
+                                <td colspan="5">
+                                    <div class="form-row col-12" style="margin: 0 auto;">
+                                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                            <thead style="background: #ebeff5;">
+                                                <tr>
+                                                    <th class="text-center">Correo</th>
+                                                    <th class="text-center">CUSPP</th>
+                                                    <th class="text-center">Fecha Inicio</th>
+                                                    <th class="text-center">Fecha Fin</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="font-size: 12px">
+                                                    <td class="text-center">{{derHabInac.correo}}</td>
+                                                    <td class="text-center">{{derHabInac.nroCuspp}}</td>
+                                                    <td class="text-center">{{derHabInac.fechaInicio| date :"dd-MM-yyyy"}}</td>
+                                                    <td class="text-center">{{derHabInac.fechaFin| date :"dd-MM-yyyy"}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+</div>

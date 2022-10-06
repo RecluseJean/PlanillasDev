@@ -1,0 +1,29 @@
+<form #nuevoSoli="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Registrar solicitud</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="puesto">Puesto</label>
+                        <ng-select [items]="lsPuesto" bindLabel="snombre" bindValue="iidPuesto" placeholder="Seleccione ..." id="puesto" name="#idPuesto" [(ngModel)]="idPuesto" style="width: 100%; margin-right: 10px;"></ng-select>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="banda">Banda</label>
+                    <input class="form-control form-control-sm" type="number" id="banda" name="#solicitud.dbanda" [(ngModel)]="solicitud.dbanda" (keypress)="verificarNumero($event)" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="mot">Motivos</label>
+                    <textarea class="form-control form-control-sm textarea" type="text" maxlength="255" id="mot" name="#solicitud.smotivos" [(ngModel)]="solicitud.smotivos" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="registrar()" type="button" [disabled]="nuevoSoli.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Registrar</button>
+    </div>
+</form>

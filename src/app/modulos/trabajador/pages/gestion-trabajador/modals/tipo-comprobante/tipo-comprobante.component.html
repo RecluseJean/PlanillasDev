@@ -1,0 +1,19 @@
+<div class="modal-header color-page-modal" style="padding: 10px 10px;">
+    <div class="form-row col-12 form-check-inline ">
+        <h6 class="modal-title" style="font-size: 13px; text-align:left;color: white;">Tipo de Comprobante de Pago</h6>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-row col-12">
+            <div class="col-12 mb-3 mt-3">
+                <label for="tcomp">Tipo Documento</label>
+                <ng-select [items]="lsTipoComprobante" bindLabel="descripcion" bindValue="idTipoPlanilla" placeholder="Seleccione un tipo" id="tcomp" [(ngModel)]="tipoComp" (ngModelChange)="limpiar($event)" name="#tipoComp" style="width: 100%; margin-right: 10px;" required></ng-select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button (click)="close()" id="cerrarTipoPlanilla" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px; ">Cancelar</button>
+    <button (click)="nuevoTrabajador()" id="nuevoTipoPlanilla" [disabled]="tipoComp==0" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px; ">Continuar</button>
+</div>
