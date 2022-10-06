@@ -41,8 +41,9 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() { //debugger
+    var empresa =  JSON.parse(localStorage.getItem('objEmpresaSeleccion'));
     var idPerfil = JSON.parse(localStorage.getItem("InfoToken")).id_perfil;
-    if (idPerfil == 1) {
+    if (idPerfil == 1 && empresa==null) {
       this.listarUsuarios();
     } else {
     this.listarUsuariosPorEmpresa();
