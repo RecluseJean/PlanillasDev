@@ -1,0 +1,39 @@
+<form #formTipPlan="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;"> Tipo Planilla - {{titulo}}</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="color: white;" class="color-page-modal">
+                                <tr>
+                                    <th class="text-center">Nombre</th>
+                                    <th class="text-center">¿Puede ver?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let perfilTipo of lsTipoPlanillaPerfiles">
+                                    <td>{{perfilTipo.perfil.nombres}}</td>
+                                    <td class="text-center" *ngIf="perfilTipo.estado==0">
+                                        <i class="mdi mdi-eye-off" aria-hidden="true" (click)="ver(perfilTipo)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center" *ngIf="perfilTipo.estado==1">
+                                        <i class="mdi mdi-eye" aria-hidden="true" (click)="ver(perfilTipo)" style="cursor: pointer; font-size: 25px; color: #3EBC1E;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button type="button" id="close" (click)="close()" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" id="confirmar" (click)="confirmar()" [disabled]="formTipPlan.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Confirmar</button>
+    </div>
+</form>

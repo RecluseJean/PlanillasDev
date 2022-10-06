@@ -1,0 +1,143 @@
+<style>
+    .asistencia-component {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        width: 100%;
+        padding: 30px;
+        position: fixed;
+    }
+</style>
+
+<header>
+    <div class="navbar-collapse frost-theme" style="height: 45px; padding: 8px; background:#212F3C;">
+        <div>
+            <i class="mdi mdi-keyboard-backspace" aria-hidden="true" style="cursor: pointer; font-size: 28px; color: #fff;" [routerLink]="['/login']"></i>
+        </div>
+    </div>
+</header>
+<section class="asistencia-component" style="background: #117A65;">
+    <div style="background-image:url(assets/images/background/login.jpg);background-size: cover;border-radius: 15px; width: 79%;margin-left: 10%; height: 82%; box-shadow: 10px -1px 48px 5px rgba(0,0,0,0.47);">
+        <div class="col-12 m-5 p-10">
+            <div class="row">
+                <div class="col-5 ml-lg-5 mt-lg-2 mb-lg-5">
+                    <div class="card " style="border-radius: 15px; border:1px solid #d6d6d6; background: transparent">
+                        <div class="card-header frost-theme" style="border-top-left-radius: 15px;border-top-right-radius: 15px; background:#117A65;">
+                            <a class="text-center" style="text-decoration: none; cursor: auto;">
+                                <h1 style="color: white;">Información</h1>
+                            </a>
+                        </div>
+                        <div class="card-body opacar" style="height: 120%;background: #ffffffe3;width: 100%;    box-shadow: -4px 4px 40px 13px rgba(0,0,0,0.47); border-radius: 0px 0px 15px 15px;">
+
+                            <p class="card-text font-18 align-center text-uppercase">Personal</p>
+                            <div class="row col-12 mb-3" text-align="center">
+                                <div class="col-6">
+                                    <p class="card-text font-14 text-uppercase">Usuario:</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text font-14 text-uppercase">{{trabajador.nombres}} {{trabajador.apePater}} {{trabajador.apeMater}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row col-12 mb-3" text-align="center">
+                                <div class="col-6">
+                                    <p class="card-text font-14 text-uppercase">Empresa:</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text font-14 text-uppercase">{{trabajador.empresa.razonSocial}}</p>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div *ngIf="tieneHorario">
+                                <p class="card-text font-18 align-center text-uppercase">Horario</p>
+                                <div class="row col-12 mb-3" text-align="center">
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">Descripcion:</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">{{horario.descripcion}}</p>
+                                    </div>
+                                </div>
+                                <div class="row col-12 mb-3" text-align="center">
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">Hora ingresa:</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">{{horario.horIniDia | date:'hh:mm a'}}</p>
+                                    </div>
+                                </div>
+                                <div class="row col-12 mb-4" text-align="center">
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">Hora salida:</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text font-14 text-uppercase">{{horario.horFinDia | date:'hh:mm a'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!tieneHorario">
+                                <p class="card-text font-18 align-center text-uppercase">Horario</p>
+                                <div style="text-align: center; font-size: 18px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                                    No cuenta con un horario asignado, por favor comuniquese con el encargado del sistema
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5 mr-lg-5 mt-lg-2 mb-lg-5">
+                    <div class="card " style="border:1px solid #d6d6d6; border-radius: 15px; background: transparent">
+                        <div class="card-header frost-theme " style="border-top-left-radius: 15px;border-top-right-radius: 15px; background:#117A65;">
+                            <a class="text-center" style="text-decoration: none; cursor: auto;">
+                                <h1 style="color: white;">Asistencia</h1>
+                            </a>
+                        </div>
+                        <div class="card-body opacar" style="height: 120%;background: #ffffffe3; width: 100%; box-shadow: -4px 4px 40px 13px rgba(0,0,0,0.47); border-radius: 0px 0px 15px 15px;">
+                            <div class="row col-12 mb-3" text-align="center">
+                                <div class="col-6">
+                                    <p class="card-text font-16 text-uppercase">Fecha:</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text font-16 text-uppercase">{{hoy | date:'dd/MM/yyyy'}}</p>
+                                </div>
+                            </div>
+                            <div class="row col-12 mb-3" text-align="center">
+                                <div class="col-6">
+                                    <p class="card-text font-16 text-uppercase">Hora:</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text font-16 text-uppercase">{{hoy | date:'hh:mm a'}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="card-text font-18 align-center text-uppercase">La asistencia se guardará según la información mostrada</p>
+
+                            <div class="row col-12 form-group text-center m-t-20">
+                                <div class="col-6">
+                                    <button (click)="marcarEntrada()" id="entrada" class="btn btn-info btn-lg btn-block text-uppercase" style="background: #007951; height: 40px; padding: 0 10px;" type="submit">Entrada</button>
+                                </div>
+                                <div class="col-6">
+                                    <button (click)="marcarSalida()" id="salida" class="btn btn-info btn-lg btn-block text-uppercase" style="background: #007951; height: 40px; padding: 0 10px;" type="submit">Salida</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="card-text font-18 align-center text-uppercase">La hora de almuerzo se guardará según la información mostrada</p>
+
+                            <div class="row col-12 form-group text-center m-t-20">
+                                <div class="col-6">
+                                    <button (click)="marcarInicio()" id="inicioAlmuerzo" class="btn btn-info btn-lg btn-block text-uppercase" style="background: #007951; height: 40px; padding: 0 10px;" type="submit">Inicio</button>
+                                </div>
+                                <div class="col-6">
+                                    <button (click)="marcarFin()" id="finAlmuerzo" class="btn btn-info btn-lg btn-block text-uppercase" style="background: #007951; height: 40px; padding: 0 10px;" type="submit">Fin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

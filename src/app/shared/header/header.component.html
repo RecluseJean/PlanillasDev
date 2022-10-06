@@ -1,0 +1,127 @@
+<!-- ============================================================== -->
+<!-- Topbar header - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-lg navbar-light">
+        <!-- ============================================================== -->
+        <!-- Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-header" style="background: #212F3C;">
+            <a class="navbar-brand" style="cursor: pointer;">
+                <!-- Logo icon -->
+                <b>
+                  <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                  <!-- Dark Logo icon -->
+                  <img src="../../../assets/images/background/icon-planillas.svg" style="width: 38px;height: 28px;margin-top: -20%;" alt="homepage" class="dark-logo" />
+                  <!-- Light Logo icon -->
+                  <img src="../../../assets/images/background/icon-planillas.svg" alt="homepage" class="light-logo" />
+                </b>
+                <!--End Logo icon -->
+                <!-- Logo text -->
+                <span>
+                  <!-- dark Logo text -->
+                  <a style="font-weight: bold;color: #fff;font-size: 25px;margin-left: 0px;padding-top: 10px;" class="dark-logo" alt="homepage">PLANILLAS</a>
+                  <!-- <img src="Planilla/assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
+                  <!-- Light Logo text -->
+                  <a style="font-weight: bold;color: #fff;font-size: 25px;margin-left: 9px;padding-top: 10px;" class="light-logo" alt="homepage">PLANILLAS</a>
+                  <!-- <img src="Planilla/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />-->
+                </span>
+            </a>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse " style="background: #212F3C;">
+
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav mr-auto fadeInRight">
+                <!-- This is  -->
+                <li class="nav-item"> <a style="color: white;" class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item"> <a style="color: white;" class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                <li class="nav-item hidden-sm-down"></li>
+                <!-- <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark">
+                         MODULO
+                    </a>
+                </li> -->
+                <li *ngIf="token.id_perfil == 1" style="width: 241px;">
+                    <div class="form-group row" style="width: 260px">
+                        <label class="col-4 col-form-label" style="color:#fff">Empresa:</label>
+                        <ng-select id="selectEmpresa" style="width: 150px;" [items]="lsEmpresas" bindLabel="razonSocial" bindValue="idEmpresa" placeholder="seleccione" [(ngModel)]="empresa.idEmpresa" (ngModelChange)="setEmpresa($event)"></ng-select>
+                    </div>
+                </li>
+                <li style="width: 241px;">
+                    <div class="form-group row" style="width: 260px">
+                        <label class="col-4 col-form-label" style="color:#fff">Año:</label>
+                        <ng-select id="selectAno" style="width: 150px;" [items]="lsAno" bindLabel="descripcion" bindValue="idPdoAno" placeholder="seleccione" [(ngModel)]="ano.idPdoAno" (ngModelChange)="setAno($event)"></ng-select>
+                    </div>
+                </li>
+                <li style="width: 241px;">
+                    <div class="form-group row" style="width: 260px">
+                        <label class="col-4 col-form-label" style="color:#fff">Mes:</label>
+                        <ng-select id="selectMes" style="width: 150px;" [items]="lsMeses" bindLabel="descripcion" bindValue="idPdoMes" placeholder="seleccione" [(ngModel)]="mes.idPdoMes" (ngModelChange)="setMes($event)"></ng-select>
+                    </div>
+                </li>
+            </ul>
+
+            <div style="margin-right: 15px;">
+                <!-- <i class="mdi mdi-home" aria-hidden="true" style="cursor: pointer; font-size: 28px; color: #fff;" [routerLink]="['/inicio']"></i> -->
+                <img src="../../../assets/images/background/icon-inicio.png" style="cursor: pointer;height: 22px;width: 23px;" [routerLink]="['/inicio']" alt="">
+            </div>
+
+            <div *ngIf="imgURL" class="p-0 m-0 justify-content-center">
+                <img height="46px" [src]="imgURL" alt="logopage" class="dark-logo" />
+            </div>
+
+            <ul class="navbar-nav my-lg-0">
+
+                <li class="nav-item ">
+                    <a class="nav-link waves-effect waves-dark">
+                        <!-- <i class="fa fa-wrench right-side-toggle" aria-hidden="true" style="color: #fff;"></i> -->
+                        <img src="../../../assets/images/background/config.png" class="right-side-toggle" style="cursor: pointer;height: 30px;width: 30px" alt="">
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <!---
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark " href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img [src]="empresa.logo | imagen:'usuario':empresa.idEmpresa" alt="user" class="profile-pic" />
+                    </a>-->
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                        <ul class="dropdown-user chat-left-inner">
+                            <!--
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img">
+                                        <img [src]="empresa.logo | imagen:'usuario':empresa.idEmpresa" alt="user">
+                                    </div>
+                                    <br>
+                                    <div class="u-text">
+                                        <h4> {{ empresa.ruc }} </h4>
+                                        <br>
+                                        <p class="text-muted text-megna"> {{ empresa.razonSocial| truncate:[20, '...'] }} </p>
+                                        <br>
+                                        <a routerLink="/datoscuenta" class="btn btn-rounded btn-danger btn-sm">Ver perfil de la empresa</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li *ngFor="let emp of lsEmpresas" class="chatonline style-none ">
+                                <a class="pointer"><img [src]="emp.logo | imagen:'usuario':emp.idempresa" alt="user-img" class="img-circle"> <span> {{emp.razonsocial|truncate:[20, '...']}} <small class="text-success">{{emp.ruc}}</small></span></a>
+                            </li>
+                        -->
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a (click)="logout()" class="pointer" id="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>

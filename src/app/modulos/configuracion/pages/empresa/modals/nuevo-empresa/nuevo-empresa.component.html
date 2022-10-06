@@ -1,0 +1,67 @@
+<form #formEmpresa="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{empresa.accion=="U"?'Actualizar':'Registrar'}} Empresa</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-6 mb-3">
+                    <label for="nomcar">Razon Social :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="rzsempr" [(ngModel)]="empresa.razonSocial" name="#empresa.razonSocial" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="cate">RUC :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="11" id="rucemp" [(ngModel)]="empresa.ruc" name="#empresa.ruc" (keypress)="verificarRuc($event)" (blur)="validarRuc()" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-6 mb-3">
+                    <label for="cate">Direccion :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="250" id="ubiemp" [(ngModel)]="empresa.ubicacion" name="#empresa.ubicacion" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="sector">Sector Empresa :</label>
+                    <ng-select [items]="lsSectorEmp" bindLabel="descripcion" bindValue="id" placeholder="Seleccione un sector" name="#idSectorEmp" id="sector" [(ngModel)]="idSectorEmp" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <!-- <div class="col-12 mb-3">
+                    <label for="tipo">Tipo de Empresa :</label>
+                    <ng-select [items]="lsTipoEmp" bindLabel="descripcion" bindValue="idTipoEmp" placeholder="Seleccione el tipo" name="#tipoEmpresa" id="tipo" [(ngModel)]="tipoEmpresa" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div> -->
+                <div class="col-12 mb-3">
+                    <label for="regtri">Regimen Tributario :</label>
+                    <ng-select [items]="lsRegTrib" bindLabel="descripcion" bindValue="idRegTrib" placeholder="Seleccione el Regimen Tributario" name="#regTributario" id="regtri" [(ngModel)]="regTributario" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container" style="padding-top:10px;">
+            <div class="form row col-12 justify-content-center">
+                <img *ngIf="imgURL" width="250" height="auto" [src]="imgURL" alt="">
+            </div>
+            <div class="form-row col-12" align="center">
+                <div class="col-12 mb-3 mt-3 align-content-center">
+                    <button type="button" class="btn btn btn-outline-info btn-sm min " style="width: 70%; margin: 0px 10px; padding: 0px;">
+                      <span style="font-size: 21px;"><i class="mdi mdi-camera"></i></span>
+                      <label style="font-weight: bold;margin: 0px;font-size: 18px;cursor: pointer; margin-left: 5px;">Escoger logo</label>
+                      <span>
+                        <input type="file" id="subir" (change)="subirFoto($event)"
+                        accept="image/x-png,image/gif,image/jpeg" class="form-control form-control-sm"
+                        style="width:70%; position:absolute; height:30px; left:0px; opacity:0; transform: translateX(42px)">
+                      </span>
+                  </button>
+                    <button *ngIf="fotoSeleccionada" (click)="cargarImgDefault()" type="button" class="btn btn btn-outline-red btn-sm min " style="width: 10%; margin: 0px; padding: 0px;">
+                      <label style="font-weight: bold;margin: 0px;font-size: 18px;cursor: pointer">X</label>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoEmpresa()" [disabled]="formEmpresa.form.invalid || rucError" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

@@ -1,0 +1,25 @@
+<form #nuevoEps="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{eps.accion=="U"?'Actualizar':'Registrar'}} EPS</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="nomeps">Nombre EPS</label>
+                    <input [(ngModel)]="eps.descripcion" class="form-control form-control-sm" type="text" id="nomeps" name="#eps.descripcion" maxlength="45" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="aporteps">Aporte</label>
+                    <input [(ngModel)]="eps.aporte" class="form-control form-control-sm" type="number" id="aporteps" name="#eps.aporte" (keypress)="verificarNumero($event)" (blur)="validarData()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoEps()" type="button" [disabled]="nuevoEps.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

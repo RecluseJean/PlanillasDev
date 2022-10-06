@@ -1,0 +1,30 @@
+<div class="modal-header color-page-modal" style="justify-content: center;">
+    <h5 class="modal-title" style="font-size:15px;color: white;">Gestión Suspensión</h5>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-row col-12 align-center" align="center">
+            <div class="col-12 mt-2">
+                <button type="button" id="descargar" (click)="descargarSuspencion()" class="btn btn-outline-success btn-sm min" style="width: 70%; margin: 0px 10px; padding: 0px;">
+                  <span style="font-size: 21px;"><i class="mdi mdi-cloud-download mr-1"></i></span>
+                  <label style="font-weight: bold;margin: 0px;font-size: 18px;">Descargar</label>
+              </button>
+            </div>
+            <div class="col-12 mb-2 mt-2">
+                <button type="button" class="btn btn btn-outline-primary btn-sm min" style="width: 70%; margin: 0px 10px; padding: 0px;">
+              <span style="font-size: 21px;"><i class="mdi mdi-cloud-upload  mr-1"></i></span>
+              <label style="font-weight: bold;margin: 0px;font-size: 18px;">Adjuntar</label>
+              <span>
+              <input type="file" id="subir" (change)="subirSuspencion($event)"
+              accept="application/pdf"
+              class="form-control form-control-sm"
+              style="width:67%; position:absolute; height:100%; left:0px; opacity:0; transform: translateX(50px)">
+              </span>
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" id="cerrar" type="button " class="btn btn-danger btn-sm min" style="margin: 0px 5px; ">Cancelar</button>
+</div>

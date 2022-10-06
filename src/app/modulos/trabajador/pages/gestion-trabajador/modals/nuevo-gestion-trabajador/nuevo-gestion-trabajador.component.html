@@ -1,0 +1,490 @@
+<form #nuevotrab="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{accion=="U"?'Actualizar':'Registrar'}} Trabajador</h5>
+    </div>
+    <div class="modal-body">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal" role="tab" aria-controls="nav-personal" aria-selected="true">Personal</a>
+                <a class="nav-item nav-link" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">General</a>
+                <a class="nav-item nav-link" id="nav-contrato-tab" data-toggle="tab" href="#nav-contrato" role="tab" aria-controls="nav-contrato" aria-selected="false">Contrato</a>
+                <a *ngIf="tipoComprob==1" class="nav-item nav-link" id="nav-aportaciones-tab" data-toggle="tab" href="#nav-aportaciones" role="tab" aria-controls="nav-aportaciones" aria-selected="false">Aportaciones</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
+                <div class="col-12 row">
+                    <div class="col-12 mt-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 100%; margin: 0 7px;">
+                        <div class="form-row col-12 mt-3">
+                            <div class="col-4 mb-3">
+                                <label for="nom">Tipo Documento *</label>
+                                <ng-select [items]="lsTipoDoc" bindLabel="descripcion" bindValue="idTipoDoc" placeholder="T. Doc." id="tdoc" [(ngModel)]="tipoDoc" name="#tipoDoc" (ngModelChange)="revisarTipoDoc($event)" [ngClass]="{'has-error':!validartd }" style="width: 100%; margin-right: 10px;"
+                                    required></ng-select>
+                            </div>
+                            <div class="col-4 mb-3" [ngSwitch]="tipoDoc">
+                                <div *ngSwitchCase="1">
+                                    <label for="ndoc">Nro. Documento *</label>
+                                    <input class="form-control form-control-sm" type="text" autocomplete="off" maxlength="80" placeholder="Nro. Doc." id="ndoc" name="#trabajador.nroDoc" [(ngModel)]="trabajador.nroDoc" name="#trabajador.nroDoc" (keypress)="verificarNumero($event,'dni')"
+                                        (blur)="validarNroDoc()" required>
+                                </div>
+                                <div *ngSwitchCase="2">
+                                    <label for="nruc">Nro. RUC *</label>
+                                    <input class="form-control form-control-sm" type="text" autocomplete="off" maxlength="80" placeholder="Nro. Ruc." id="nruc" [(ngModel)]="trabajador.nroDoc" name="#trabajador.nroDoc" (keypress)="verificarNumero($event,'ruc')" (blur)="validarData('ruc')"
+                                        required>
+                                </div>
+                                <div *ngSwitchCase="3">
+                                    <label for="npas">Nro. Pasaporte *</label>
+                                    <input class="form-control form-control-sm" type="text" autocomplete="off" maxlength="80" placeholder="Nro. Pas." id="npas" [(ngModel)]="trabajador.nroDoc" name="#trabajador.nroDoc" required>
+                                </div>
+                                <div *ngSwitchCase="4">
+                                    <label for="ncarext">Nro. Carnet Extranejeria *</label>
+                                    <input class="form-control form-control-sm" type="text" autocomplete="off" maxlength="80" placeholder="Nro. Car." id="ncarext" [(ngModel)]="trabajador.nroDoc" name="#trabajador.nroDoc" required>
+                                </div>
+                                <div *ngSwitchDefault>
+                                    <label>Seleccione tipo documento *</label>
+                                    <input class="form-control form-control-sm" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3" *ngIf="!flag_tpo_doc">
+                                <label for="pem">País Emisor *</label>
+                                <ng-select [items]="lsPais" bindLabel="descripcion" bindValue="idPais" placeholder="P. Emisor Doc" id="pais" [(ngModel)]="pais" name="#pais" style="width: 100%; margin-right: 10px;" required></ng-select>
+                            </div>
+                            <!-- ruc -->
+                            <div *ngIf="tipoComprob==2" class="col-4 mb-3">
+                                <label for="rucrhe">RUC *</label>
+                                <input class="form-control form-control-sm" type="number" autocomplete="off" maxlength="11" placeholder="RUC" id="rucrhe" [(ngModel)]="trabajador.ruc" name="#trabajador.ruc" (keypress)="verificarNumero($event,'ruc')" (blur)="validarData('ruc')" required>
+                            </div>
+                            <!-- ruc -->
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-4 mb-3">
+                                <label for="nom">Nombres *</label>
+                                <input class="form-control form-control-sm verf" type="text" placeholder="Nom." id="nom" [(ngModel)]="trabajador.nombres" name="#trabajador.nombres" maxlength="80" (keypress)="verificarString($event)" required>
+                            </div>
+
+
+                            <div class="col-4 mb-3">
+                                <label for="apepat">Apellido Paterno *</label>
+                                <input class="form-control form-control-sm verf" type="text" placeholder="Ape. Pat." id="apepat" [(ngModel)]="trabajador.apePater" name="#trabajador.apePater" maxlength="80" (keypress)="verificarString($event)" required>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="apemat">Apellido Materno *</label>
+                                <input class="form-control form-control-sm verf" type="text" placeholder="Ape. Mat." id="apemat" [(ngModel)]="trabajador.apeMater" name="#trabajador.apeMater" maxlength="80" (keypress)="verificarString($event)" required>
+                            </div>
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-4 mb-3">
+                                <label>Fecha Nacimiento *</label>
+                                <ejs-datepicker [max]="mayorEdad" format='dd-MM-yyyy' type="datepicker" placeholder='Elige una fecha' [(ngModel)]="trabajador.fecNac" name="#trabajador.fecNac" required> </ejs-datepicker>
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="col-4 mb-3">
+                                <label for="sexo">Sexo *</label>
+                                <ng-select [items]="lsSexo" bindLabel="descripcion" bindValue="abrev" placeholder="Sexo" id="sexo" [(ngModel)]="trabajador.sexo" name="#trabajador.sexo" (change)="select($event)" [ngClass]="{'has-error':!validarselect}" style="width: 100%; margin-right: 10px;"
+                                    required></ng-select>
+                            </div>
+
+
+
+
+                            <div class="col-4 mb-3">
+                                <label for="esci">Estado Civil *</label>
+                                <ng-select [items]="lsEstadoCiv" bindLabel="descripcion" bindValue="idEstadoCivil" placeholder="Estado C." id="esci" [(ngModel)]="estCiv" name="#estCiv" (change)="selectec($event)" [ngClass]="{'has-error':!validarec}" style="width: 100%; margin-right: 10px;"
+                                    required></ng-select>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="form-row col-12">
+                            <div class="col-4 mb-3">
+                                <label for="corr">Correo *</label>
+                                <input class="form-control form-control-sm" type="email" placeholder="Correo" id="corr" [(ngModel)]="trabajador.correo" name="#trabajador.correo" maxlength="80" (blur)="verificarCorreo(trabajador.correo)" required email>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="cel">Celular</label>
+                                <input class="form-control form-control-sm" type="text" placeholder="Celular" id="cel" [(ngModel)]="trabajador.nroCel" name="#trabajador.nroCel" maxlength="9" (keypress)="verificarNumero($event,'cel')" (blur)="validarData('cel')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                <div class="col-12 row">
+                    <div class="col-6 mt-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="form-row col-12">
+                            <div class="col-10 mb-3">
+                                <label for="dep">Departamento *</label>
+                                <ng-select [items]="lsDepartamento" bindLabel="descripcion" bindValue="idDepartamento" placeholder="Departamento" id="dep" [(ngModel)]="departamento" name="#departamento" (ngModelChange)="obtenerProvincias($event)" [ngClass]="{'has-error':!validardepa}"
+                                    style="width: 100%; margin-right: 10px;" required></ng-select>
+                            </div>
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-10 mb-3">
+                                <label for="prov">Provincia *</label>
+                                <ng-select [items]="lsProvincia" bindLabel="descripcion" bindValue="idProvincia" placeholder="Provincia" id="prov" [(ngModel)]="provincia" name="#provincia" (ngModelChange)="obtenerDistrito($event)" [ngClass]="{'has-error':!validarprov}" style="width: 100%; margin-right: 10px;"
+                                    required></ng-select>
+                            </div>
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-10 mb-3">
+                                <label for="dis">Distrito *</label>
+                                <ng-select [items]="lsDistrito" bindLabel="descripcion" bindValue="idDistrito" placeholder="Distrito" id="dis" [(ngModel)]="distrito" name="#distrito" (change)="selectdist($event)" [ngClass]="{'has-error':!validardist}" style="width: 100%; margin-right: 10px;"
+                                    required></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="form-row col-12">
+                            <div class="col-11 mb-3">
+                                <label for="dirr">Dirección *</label>
+                                <input class="form-control form-control-sm" type="text" placeholder="Dirección" id="dirr" [(ngModel)]="trabajador.direccion" name="#trabajador.direccion" maxlength="100" required>
+                            </div>
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-6 mb-3">
+                                <label for="tzon">Tipo Zona</label>
+                                <ng-select [items]="lsTipoZona" bindLabel="descripcion" bindValue="idTipoZona" placeholder="T. Zona" id="tzon" [(ngModel)]="tpozona" name="tpozona" style="width: 100%; margin-right: 10px;"></ng-select>
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="nomb">Nombre</label>
+                                <input class="form-control form-control-sm" type="text" placeholder="Nombre" id="nomb" [(ngModel)]="trabajador.nomZona" name="trabajador.nomZona" maxlength="80">
+                            </div>
+                        </div>
+                        <div class="form-row col-12">
+                            <div class="col-11 mb-3">
+                                <label for="ref">Referencia</label>
+                                <input class="form-control form-control-sm" type="text" placeholder="Referencia" id="ref" [(ngModel)]="trabajador.referencia" name="#trabajador.referencia" maxlength="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 mb-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 98%; margin: 0 7px;" *ngIf="tipoComprob==1">
+                        <div class="form-row col-12">
+                            <div class="col-5 mb-3">
+                                <label for="nedu">Nivel Educativo</label>
+                                <ng-select [items]="lsNivelEdu" bindLabel="descripcion" bindValue="idNivelEdu" placeholder="N. Edu" id="nedu" [(ngModel)]="nivedu" name="#nivedu" style="width: 100%; margin-right: 10px;"></ng-select>
+                            </div>
+                            <div class="col-2 mb-3">
+                                <label for="nhij">Nro. Hijos *</label>
+                                <input class="form-control form-control-sm" type="number" placeholder="Nro. Hijos" id="nhij" [(ngModel)]="trabajador.nroHij" name="#trabajador.nroHij" (keypress)="verificarNumero($event,'')" (blur)="validarData('nhij')" required>
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="ocu">Ocupación</label>
+                                <ng-select [items]="lsOcupacion" bindLabel="descripcion" bindValue="idOcupacion" placeholder="Ocupación" id="ocu" [(ngModel)]="ocupacion" name="#ocupacion" style="width: 100%; margin-right: 10px;"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contrato" role="tabpanel" aria-labelledby="nav-contrato-tab">
+                <div class="col-12 row">
+                    <div class="col-6 mt-3" style="width: 48%; border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="card example-2 square scrollbar-cyan bordered-cyan">
+                            <div class="card-body">
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3" *ngIf="tipoComprob==1">
+                                        <label for="regl">Regimen Laboral</label>
+                                        <ng-select [items]="lsRegLaboral" bindLabel="descripcion" bindValue="idRegLaboral" placeholder="Regimen Laboral" id="regl" [(ngModel)]="reglabo" name="#reglabo" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="tcol">Tipo Contrato Laboral *</label>
+                                        <ng-select [items]="lsTipoContrato" bindLabel="descripcion" bindValue="idTipContrato" placeholder="T. Cont. Lab." id="tcol" [(ngModel)]="tipocontrato" (change)="selecttpcl($event)" [ngClass]="{'has-error':!validartpcl}" name="#tipocontrato" style="width: 100%; margin-right: 10px;"
+                                            required></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="stu">Situación *</label>
+                                        <ng-select [items]="lsSituacion" bindLabel="descripcion" bindValue="idSituacion" placeholder="Situación" id="stu" [(ngModel)]="situacion" (change)="selectsitu($event)" [ngClass]="{'has-error':!validarsitu}" name="#situacion" style="width: 100%; margin-right: 10px;"
+                                            required></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="cst">Centro Costo</label>
+                                        <ng-select [items]="lsCentroCosto" bindLabel="descripcion" bindValue="idCentroCosto" placeholder="Centro Costo" id="cst" [(ngModel)]="centrocosto" name="#centrocosto" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="area">Área Empresa</label>
+                                        <ng-select [items]="lsAreaDepEmp" bindLabel="snombre" bindValue="iidAreaDepartamentoEmpresa" placeholder="Área Empresa" id="area" [(ngModel)]="id_areaDepEmp" name="#id_areaDepEmp" (ngModelChange)="obtenerPuesto($event)" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="pues">Puesto</label>
+                                        <ng-select [items]="lsPuesto" bindLabel="snombre" bindValue="iidPuesto" placeholder="Puesto" id="pues" [(ngModel)]="id_puesto" name="#puesto" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-1">
+                                        <label for="hora">Horarios</label>
+                                        <ng-select [items]="lsHorario" bindLabel="descripcion" bindValue="idHorario" placeholder="Horario" id="hora" [(ngModel)]="horario" name="#horario" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                    <!-- <div class="col-4 mb-3">
+                                        <label for="hor">Hora</label>
+                                        <input class="form-control form-control-sm" type="text" id="hor" disabled>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-3" style="width: 48%; border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="card example-2 square scrollbar-cyan bordered-cyan">
+                            <div class="card-body">
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label>Fecha Inicio *</label>
+                                        <ejs-datepicker format='dd-MM-yyyy' name="#contrato.fecInicio" type="text" placeholder='Elige una fecha' [(ngModel)]="contrato.fecInicio" (ngModelChange)="validarFechaFin($event)" required> </ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="tipoComprob==2">
+                                    <div class="col-10 mb-3">
+                                        <label>Fecha Fin</label>
+                                        <ejs-datepicker format='dd-MM-yyyy' name="#contrato.fecFin" type="text" placeholder='Elige una fecha' [(ngModel)]="contrato.fecFin" [min]="minFecFin" [disabled]="fecFinDis"> </ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-5 mb-3">
+                                        <label for="sldbas">Sueldo Base *</label>
+                                        <input class="form-control form-control-sm" type="text" minlength="2" placeholder="Sueldo base" id="sldbas" [(ngModel)]="contrato.sueldoBase" name="#contrato.sueldoBase" (ngModelChange)="calcularPorHora($event)" (blur)="verificarNumeroDecimal(contrato.sueldoBase,'sldb')"
+                                            required>
+                                    </div>
+                                    <div class="col-5 mb-3" *ngIf="tipoComprob==1">
+                                        <label for="xh">Por Hora</label>
+                                        <input class="form-control form-control-sm" type="number" placeholder="0.00" id="xh" [(ngModel)]="contrato.valorHora" name="#contrato.valorHora" disabled>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="tpag">Tipo Pago *</label>
+                                        <ng-select [items]="lsTipoPago" bindLabel="descripcion" bindValue="idTipoPago" placeholder="Tipo Pago" id="tpag" [(ngModel)]="tipopago" (ngModelChange)="limpiarTipoPago($event)" [ngClass]="{'has-error':!validartppago}" name="#tipopago" style="width: 100%; margin-right: 10px;"
+                                            required></ng-select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row col-12" *ngIf="tipopago == tipoPagoDeposito">
+                                    <div class="col-10 mb-3">
+                                        <label for="bnc">Banco *</label>
+                                        <ng-select [items]="lsBanco" bindLabel="descripcion" bindValue="idBanco" placeholder="Banco" id="bnc" [(ngModel)]="banco" name="#banco" (change)="selectbanc($event)" [ngClass]="{'has-error':!validarbanc}" style="width: 100%; margin-right: 10px;" required></ng-select>
+                                    </div>
+                                    <div class="col-5 mb-3" *ngIf="tipopago == tipoPagoDeposito">
+                                        <label for="tcuenta">Tipo Cuenta</label>
+                                        <ng-select [items]="lsTipoCuenta" bindLabel="descripcion" bindValue="id" placeholder="Tipo Cuenta" id="tcuenta" [(ngModel)]="tipoCuenta" name="#tipoCuenta" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                    <div class="col-5 mb-3" *ngIf="tipopago == tipoPagoDeposito">
+                                        <label for="tmoneda">Tipo Moneda</label>
+                                        <ng-select [items]="lsTipoMoneda" bindLabel="descripcion" bindValue="id" placeholder="Tipo Moneda" id="tmoneda" [(ngModel)]="tipoMoneda" name="#tipoMoneda" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                    <div class="col-10 mb-3">
+                                        <label for="ncta">Nro. Cuenta *</label>
+                                        <input class="form-control form-control-sm" type="text" maxlength="45" placeholder="Referencia" id="ncta" [(ngModel)]="contrato.nroCta" name="#contrato.nroCta" (keypress)="verificarNumero($event,'')" required>
+                                    </div>
+                                    <div class="col-10 mb-3">
+                                        <label for="cci">Nro. CCI</label>
+                                        <input class="form-control form-control-sm" type="text" maxlength="45" placeholder="Referencia" id="cci" [(ngModel)]="contrato.nroCci" name="#contrato.nroCci" (keypress)="verificarNumero($event,'nroCci')">
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="tipoComprob==1">
+                                    <div class="col-10 mb-1">
+                                        <label for="mov">Movilidad</label>
+                                        <input class="form-control form-control-sm" type="number" placeholder="Referencia" id="mov" [(ngModel)]="contrato.movilidad" name="#contrato.movilidad" (blur)="verificarNumeroDecimal(contrato.movilidad,'mov')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 mb-2" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 98%; margin: 0 7px;" *ngIf="tipoComprob==1">
+                        <div class="col-12 row" style="margin: 0;">
+                            <div class="col-6" style="flex: 0 0 38%;padding: 0">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="SearchOptions" id="regimen" [(ngModel)]="contrato.regAlterAcuAtp" (ngModelChange)="checkAlterAcuAtp($event)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="regimen" style="font-size: 12px;">Regimen alternativo, acumulativo o atipico</label>
+                                </div>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 16%;padding: 0 6px;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="SearchOptions" id="discapacidad" [(ngModel)]="contrato.discap" (ngModelChange)="checkDiscap($event)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="discapacidad" style="font-size: 12px;">Discapacidad</label>
+                                </div>
+                            </div>
+                            <div class="col-4" style="flex: 0 0 27%;padding: 0 6px;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="SearchOptions" id="jornada" [(ngModel)]="contrato.jorMax" (ngModelChange)="checkJorMax($event)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="jornada" style="font-size: 12px;">Jornada de trabajo maxima</label>
+                                </div>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 19%;padding: 0">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="SearchOptions" id="horario" [(ngModel)]="contrato.horNoc" (ngModelChange)="checkHorNoc($event)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label" for="horario" style="font-size: 12px;">Horario nocturno</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-aportaciones" role="tabpanel" aria-labelledby="nav-aportaciones-tab">
+                <div class="col-12 row" style="margin: 0;">
+                    <div class="col-6 mt-3 mb-3" style="width:48%; border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="card example-2 square scrollbar-cyan bordered-cyan">
+                            <div class="card-body">
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="regpen">Regimen Pensionario</label>
+                                        <ng-select [items]="lsAfp" bindLabel="descripcion" bindValue="idAfp" placeholder="Regimen Pensionario" id="regpen" [(ngModel)]="afp" name="#afp" style="width: 100%; margin-right: 10px;" (ngModelChange)="limpiarRegPen($event)"></ng-select>
+                                    </div>
+                                    <div class="form-check form-check-inline col-10 mb-3" *ngIf="afp">
+                                        <input class="form-check-input" type="checkbox" name="SearchOptions" id="comimix" [(ngModel)]="trabajador.comiMixta" name="#trabajador.comiMixta" (ngModelChange)="checkComiMix($event)">
+                                        <label class="form-check-label" for="comimix" style="font-size: 12px;">Comision Mixta</label>
+                                    </div>
+                                    <div class="col-10 mb-3" *ngIf="afp">
+                                        <label>Fecha Ingreso</label>
+                                        <ejs-datepicker format='dd-MM-yyyy' name="#trabajador.fecRegPens" type="text" placeholder='Elige una fecha' [(ngModel)]="trabajador.fecRegPens"> </ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="ncus">Nro. CUSPP</label>
+                                        <input class="form-control form-control-sm" type="text" placeholder="Nro. CUSPP" id="ncus" [(ngModel)]="trabajador.nroCuspp" name="#trabajador.nroCuspp" maxlength="80" (keypress)="verificarNumero($event,'nrocu')">
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="sctr">SCTR Pension</label>
+                                        <ng-select [items]="lsSctr" bindLabel="descripcion" bindValue="idSctr" placeholder="SCTR Pension" id="sctr" [(ngModel)]="sctrpension" name="#sctrpension" style="width: 100%; margin-right: 10px;" (ngModelChange)="limpiarEPSpens($event)"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="sctrpension == sctrPensionEps">
+                                    <div class="col-10 mb-3">
+                                        <label for="penseps">EPS Pension</label>
+                                        <ng-select [items]="lsEps" bindLabel="descripcion" bindValue="idEps" placeholder="EPS Regimen Pension" id="penseps" [(ngModel)]="epsPension" name="#epsPension" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="margin-left: -5px;">
+                                    <div class="col-11" style="flex: 0 0 19%;padding: 0 3px;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="ingresos" [(ngModel)]="contrato.otrIgr5ta" (ngModelChange)="checkOtrIgr5ta($event)" [ngModelOptions]="{standalone: true}">
+                                            <label class="form-check-label" for="ingresos" style="font-size: 12px;">Otros ingresos de 5ta categoria</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-11" style="flex: 0 0 19%;padding: 0 3px;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="sindicalizado" [(ngModel)]="contrato.sindical" (ngModelChange)="checkSindical($event)" [ngModelOptions]="{standalone: true}">
+                                            <label class="form-check-label" for="sindicalizado" style="font-size: 12px;">Sindicalizado</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-11 mb-2" style="flex: 0 0 19%;padding: 0 3px;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="renta" [(ngModel)]="contrato.quintaExo" (ngModelChange)="checkQuintaExo($event)" [ngModelOptions]="{standalone: true}">
+                                            <label class="form-check-label" for="renta" style="font-size: 12px;">Renta de 5ta categoria exonerada o inafecta</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="bcts">Banco CTS</label>
+                                        <ng-select [items]="lsBanco" bindLabel="descripcion" bindValue="idBanco" placeholder="Banco CTS" id="bcts" [(ngModel)]="bancocts" name="#bancocts" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="bancocts">
+                                    <div class="col-10 mb-1">
+                                        <label for="ncuen">Nro. Cuenta</label>
+                                        <input class="form-control form-control-sm" type="text" maxlength="45" placeholder="Nro. Cuenta" id="nomb" [(ngModel)]="contrato.cuentaCTS" name="#contrato.cuentaCTS">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-3 mb-3" style="width: 48%; border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 0 7px;">
+                        <div class="card example-2 square scrollbar-cyan bordered-cyan">
+                            <div class="card-body">
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="regsa">Regimen Salud</label>
+                                        <ng-select [items]="lsRegSalud" bindLabel="descripcion" bindValue="idRegSalud" placeholder="Regimen Salud" id="regsa" [(ngModel)]="regsalud" style="width: 100%; margin-right: 10px;" (ngModelChange)="limpiarEPSreg($event)" [ngModelOptions]="{standalone: true}"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="regsalud == regSaludEps">
+                                    <div class="col-10 mb-3">
+                                        <label for="regeps">EPS Regimen</label>
+                                        <ng-select [items]="lsEps" bindLabel="descripcion" bindValue="idEps" placeholder="EPS Regimen Salud" id="regeps" [(ngModel)]="epsRegsalud" name="#epsRegsalud" style="width: 100%; margin-right: 10px;" required></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="regsalud">
+                                    <div class="col-10 mb-3">
+                                        <label>Fecha Ingreso</label>
+                                        <ejs-datepicker format='dd-MM-yyyy' type="text" placeholder='Elige una fecha' [(ngModel)]="trabajador.fecIngrSalud" name="#trabajador.fecIngrSalud" required> </ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="cusp">Nro. EsSalud</label>
+                                        <input class="form-control form-control-sm" type="text" maxlength="20" placeholder="Nro. EsSalud" id="cusp" [(ngModel)]="trabajador.nroEssalud" name="#trabajador.nroEssalud" (keypress)="verificarNumero($event,'')">
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="vida" [(ngModel)]="trabajador.essaludVida" (ngModelChange)="checkEssaludVida($event)" [ngModelOptions]="{standalone: true}">
+                                            <label class="form-check-label" for="vida" style="font-size: 12px;">EsSalud + Vida</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12">
+                                    <div class="col-10 mb-3">
+                                        <label for="sctsa">SCTR Salud</label>
+                                        <ng-select [items]="lsSctr" bindLabel="descripcion" bindValue="idSctr" placeholder="SCTR Salud" id="sctsa" [(ngModel)]="sctrsalud" name="#sctrsalud" style="width: 100%; margin-right: 10px;" (ngModelChange)="setearTipo($event)"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="sctrsaludTipo == sctrSaludEps">
+                                    <div class="col-10 mb-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="servp" [(ngModel)]="contrato.epsServPropSalud" (ngModelChange)="checkEPS($event)" name="#contrato.epsServPropSalud">
+                                            <label class="form-check-label" for="servp" style="font-size: 12px;">EPS/Servicios Propios</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row col-12" *ngIf="sctrsaludTipo == sctrSaludEps && epsSaludcheck == 1 ">
+                                    <div class="col-10 mb-3">
+                                        <label for="epssalud">EPS</label>
+                                        <ng-select [items]="lsEps" bindLabel="descripcion" bindValue="idEps" placeholder="EPS" id="epssalud" [(ngModel)]="epsSalud" name="#epsSalud" style="width: 100%; margin-right: 10px;"></ng-select>
+                                    </div>
+                                    <div class="col-10 mb-1">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="SearchOptions" id="afil" [(ngModel)]="trabajador.afilAseguPens" name="#trabajador.afilAseguPens" (ngModelChange)="checkAfilAseg($event)">
+                                            <label class="form-check-label" for="afil" style="font-size: 12px;">Afiliación asegura pension</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" modal-footer ">
+        <button (click)="close()" id="cerrar" type="button " class="btn btn-warning btn-sm min " style="margin: 0px 5px; ">Cancelar</button>
+        <button type="button " id="confirmar" class="btn btn-info btn-sm min " [disabled]="nuevotrab.form.invalid" (click)="confirmarNuevoTrabajador() " style="margin: 0px 5px; ">Continuar</button>
+    </div>
+</form>

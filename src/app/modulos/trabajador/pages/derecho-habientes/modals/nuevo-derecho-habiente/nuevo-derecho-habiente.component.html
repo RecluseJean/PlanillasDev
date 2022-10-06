@@ -1,0 +1,67 @@
+<form #formDerechoHab="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Nuevo Derecho Habiente</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="nomdh">Nombre :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="nomdh" [(ngModel)]="derechoHabiente.nombre" name="#derechoHabiente.nombre" required>
+                </div>
+            </div>
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="apedh">Apellidos :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="apedh" [(ngModel)]="derechoHabiente.apellido" name="#derechoHabiente.apellido" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="cordh">Correo :</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="cordh" [(ngModel)]="derechoHabiente.correo" name="#derechoHabiente.correo" required email>
+                </div>
+            </div>
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="ncusppdh">Nro. CUSPP :</label>
+                    <input class="form-control form-control-sm" type="number" maxlength="45" id="ncusppdh" [(ngModel)]="derechoHabiente.nroCuspp" name="#derechoHabiente.nroCuspp" (keypress)="verificarNumero($event)" required>
+                </div>
+            </div>
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="dirr">Fecha Nacimiento</label>
+                    <ejs-datepicker format='dd-MM-yyyy' name="#contrato.fechaNac" type="text" id='datepicker' placeholder='Elige una fecha' [(ngModel)]="derechoHabiente.fechaNac" required> </ejs-datepicker>
+                </div>
+            </div>
+
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="derhab">Tipo Derecho Habiente: </label>
+                    <ng-select [items]="lsderHab" bindLabel="descripcion" bindValue="idTipoDH" name="#derechoHabiente.idTipoDerechoHabiente" [(ngModel)]="derechoHabiente.tipoDerechoHabiente" placeholder="Seleccione Derecho Habiente" id="derhab" style="width: 100%; margin-right: 10px;"
+                        required></ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="dirr">Fecha Inicio</label>
+                    <ejs-datepicker format='dd-MM-yyyy' name="#contrato.fechaInicio" type="text" id='datepicker' placeholder='Elige una fecha' [(ngModel)]="derechoHabiente.fechaInicio" required> </ejs-datepicker>
+                </div>
+            </div>
+            <div class="form-row col-6">
+                <div class="col-12 mb-3">
+                    <label for="dirr">Fecha Fin</label>
+                    <ejs-datepicker format='dd-MM-yyyy' name="#contrato.fechaFin" type="text" id='datepicker' placeholder='Elige una fecha' [(ngModel)]="derechoHabiente.fechaFin" required> </ejs-datepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" [disabled]="formDerechoHab.form.invalid" (click)="openModalConfirmar()" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

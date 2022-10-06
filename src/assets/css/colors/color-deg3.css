@@ -1,0 +1,237 @@
+/*******************
+/*Top bar
+*******************/
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 12px;
+    background: #f7f7f7;
+    border-top: 5px;
+}
+
+.topbar {
+    background: #000000a8;
+}
+
+.topbar .navbar-header {
+    background: transparent;
+}
+
+.topbar .top-navbar .navbar-header .navbar-brand .light-logo {
+    display: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link {
+    color: #ffffff !important;
+}
+
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link:hover,
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link:focus {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+
+/* .hdr-nav-bar .navbar .navbar-nav>li.active>a {
+    border-color: #7460ee;
+} */
+
+
+/*******************
+/*General Elements
+*******************/
+
+
+/* .lstick {
+    background: #7460ee;
+}
+
+a.link:hover,
+a.link:focus {
+    color: #7460ee !important;
+}
+
+.bg-theme {
+    background-color: #7460ee !important;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    background-color: #7460ee;
+    border-color: #7460ee;
+}
+
+.right-sidebar .rpanel-title {
+    background: #7460ee;
+}
+
+.right-sidebarconf .rpanel-title {
+    background: #7460ee;
+}
+
+.stylish-table tbody tr:hover,
+.stylish-table tbody tr.active {
+    border-left: 4px solid #7460ee;
+}
+
+.text-themecolor {
+    color: #7460ee !important;
+}
+
+.profile-tab li a.nav-link.active,
+.customtab li a.nav-link.active {
+    border-bottom: 2px solid #7460ee;
+    color: #7460ee;
+}
+
+.profile-tab li a.nav-link:hover,
+.customtab li a.nav-link:hover {
+    color: #7460ee;
+} */
+
+
+/*******************
+/*Buttons
+*******************/
+
+
+/* .btn-themecolor,
+.btn-themecolor.disabled {
+    background: #7460ee;
+    color: #ffffff;
+    border: 1px solid #7460ee;
+}
+
+.btn-themecolor:hover,
+.btn-themecolor.disabled:hover {
+    background: #7460ee;
+    opacity: 0.7;
+    border: 1px solid #7460ee;
+}
+
+.btn-themecolor.active,
+.btn-themecolor:focus,
+.btn-themecolor.disabled.active,
+.btn-themecolor.disabled:focus {
+    background: #028ee1;
+} */
+
+
+/*******************
+/*sidebar navigation
+*******************/
+
+.label-themecolor {
+    background: #ffffff;
+}
+
+.sidebar-nav>ul>li.active>a {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.sidebar-nav>ul>li.active>a i {
+    color: #ffffff;
+}
+
+.sidebar-nav .has-arrow::after {
+    border-color: #ffffff;
+}
+
+.sidebar-nav ul li a.active,
+.sidebar-nav ul li a:hover {
+    background: #0000001f;
+    color: #ffffff;
+    transition: all 0.7s ease-out;
+}
+
+.sidebar-nav ul li a {
+    color: #ffffff !important;
+}
+
+.sidebar-nav ul li a.active i,
+.sidebar-nav ul li a:hover i {
+    color: #ffffff;
+}
+
+.sidebar-nav>ul>li>a i {
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.sidebar-nav>ul>li>a>span {
+    color: #ffffff;
+}
+
+
+/*******************
+/*sidebar
+*******************/
+
+.left-sidebar2 {
+    background: linear-gradient(45deg, #e4791bcf, #bc45e4cf);
+    background-repeat: repeat-x;
+}
+
+.h5-home {
+    color: #ffffff;
+}
+
+.sidebar-nav {
+    background: transparent;
+}
+
+.right-sidebar .rpanel-title {
+    background: linear-gradient(to left, #004e92, #000428);
+}
+
+.right-sidebarconf .rpanel-title {
+    background: #000000a8;
+}
+
+.color-page-tr,
+.color-page-modal {
+    background: #8e2fad !important;
+}
+
+.color-page-i {
+    color: #8e2fad !important;
+}
+
+.color-page-button {
+    background: #8e2fad !important;
+}
+
+@media (min-width: 768px) {
+    .mini-sidebar .sidebar-nav #sidebarnav>li>ul {
+        background: linear-gradient(45deg, #e4791b, #bc45eb);
+    }
+}
+
+@media (min-width: 768px) {
+    .mini-sidebar .sidebar-nav #sidebarnav>li:hover>a {
+        background: #e4791b !important;
+    }
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:after {
+    background: #8e2fad !important;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:before,
+[type="radio"].with-gap:checked+label:after {
+    border: 2px solid #8e2fad;
+}

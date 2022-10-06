@@ -1,0 +1,33 @@
+<form #nuevoAdelantoVaca="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">Registrar Adelanto de vacaciones</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="desc">Cantidad de Dias disponibles a tomar</label>
+                    <div class="qty mt-1 " style="text-align: center;">
+                        <button (click)="disminuir()" *ngIf="diasAdelantados>1" class="minus bg-primary">-</button>
+                        <input type="number" style="border: 0; width: 2%;" class="count" name="qty" [(ngModel)]="diasAdelantados" disabled>
+                        <button (click)="aumentar()" *ngIf="diasAdelantados < maxAdelanto" class="plus bg-primary">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-6 mb-3">
+                    <label>Fecha de Inicio</label>
+                    <ejs-datepicker format='dd-MM-yyyy' type="datepicker" placeholder='Elige fecha inicio' [(ngModel)]="fechaIni" (ngModelChange)="calcularFin()" name="#fechaIni" required></ejs-datepicker>
+                </div>
+                <div class="col-6 mb-3">
+                    <label>Fecha Fin</label>
+                    <ejs-datepicker format='yyyy-MM-dd' type="datepicker" [(ngModel)]="fechaFin" name="#fechaFin" disabled required></ejs-datepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarAdeVaca()" type="button" [disabled]="nuevoAdelantoVaca.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

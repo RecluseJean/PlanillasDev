@@ -1,0 +1,108 @@
+/*
+Template Name: Admin pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*Theme Colors*/
+
+
+/*bootstrap Color*/
+
+
+/*Light colors*/
+
+
+/*Normal Color*/
+
+
+/*Extra Variable*/
+
+
+/*******************
+Login register and recover password Page
+******************/
+
+.login-register {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    padding: 30px 30px 30px 30px;
+    position: fixed;
+}
+
+.login-box {
+    max-width: 350px;
+    min-width: 150px;
+    width: 350px;
+    padding: 8% 0%;
+    margin: auto;
+    background: none;
+    transform: translateX(22%);
+}
+
+.opacar {
+    background-color: rgba(255, 255, 255, 0.6)
+}
+
+.login-box .footer {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+}
+
+.login-box .social {
+    display: block;
+    margin-bottom: 30px;
+}
+
+#recoverform {
+    display: none;
+}
+
+.login-sidebar {
+    padding: 0px;
+    margin-top: 0px;
+}
+
+.login-sidebar .login-box {
+    right: 0px;
+    /* position: absolute; */
+    height: 100%;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #455a64 !important;
+    font-weight: 600;
+}
+
+ :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #455a64 !important;
+    font-weight: 600;
+}
+
+ ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #455a64 !important;
+    font-weight: 600;
+}
+
+ :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #455a64 !important;
+    font-weight: 600;
+}

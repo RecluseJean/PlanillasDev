@@ -1,0 +1,21 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" style="font-size: 15px;">Confirmar {{solicitud.accion=="R"?'revisión':solicitud.accion=="SA"?'aprobación':solicitud.accion=="SR"?'rechazo':'cancelación'}} de solicitud</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3 mt-3">
+                    <h4 style="text-align: center; font-size: 16px;">
+                        <!-- ¿Desea {{solicitud.accion=="C"'Cancelar'}} la Solicitud? -->
+                        ¿Esta seguro de {{solicitud.accion=="R"?'revisar':solicitud.accion=="SA"?'aprobar':solicitud.accion=="SR"?'rechazar':'cancelar'}} la Solicitud?
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button " class="btn btn-danger btn-sm min" style="margin: 0px 5px; ">Cancelar</button>
+        <button (click)="crud()" type="button " class="btn btn-info btn-sm min" style="margin: 0px 5px; ">{{solicitud.accion=="R"?'Confirmar':solicitud.accion=="SA"?'Confirmar':solicitud.accion=="SR"?'Confirmar':'Confirmar'}}</button>
+    </div>
+</div>

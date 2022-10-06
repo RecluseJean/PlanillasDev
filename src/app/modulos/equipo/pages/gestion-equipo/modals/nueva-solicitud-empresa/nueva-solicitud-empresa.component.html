@@ -1,0 +1,42 @@
+<form #registrarSolicitud="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Nueva solicitud de recurso</h5>
+    </div>
+    <div class="modal-body">
+        <div [hidden]="(token.id_perfil===1  || token.id_perfil === 2  || token.id_perfil != 4 || token.id_perfil != 5    )">
+            <div class="form-group row">
+                <label for="nompuestorecurso" class="col-sm-3 col-form-label">Puesto del Recurso:</label>
+                <div class="col-sm-7">
+                    <!-- <input  class="form-control form-control-sm" type="text" id="nompuestorecurso" maxlength="50"> -->
+                    <ng-select [items]="lsPuestoProyOrden" bindLabel="snombre" bindValue="iidPuesto" placeholder="Seleccione un puesto" id="nompuestorecurso" name="#iidPuesto" [(ngModel)]="iidPuesto" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div>
+        </div>
+        <div [hidden]="!(token.id_perfil===1  || token.id_perfil === 2  || token.id_perfil != 4 || token.id_perfil != 5 )">
+            <div class="form-group row">
+                <label for="nompuestorecurso" class="col-sm-3 col-form-label">Puesto del Recurso:</label>
+                <div class="col-sm-7">
+                    <ng-select [items]="lsPuesto" bindLabel="snombre" bindValue="iidPuesto" placeholder="Seleccione un puesto" id="nompuestorecurso" name="#iidPuesto" [(ngModel)]="iidPuesto" style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="banda" class="col-sm-3 col-form-label">Banda:</label>
+            <div class="col-sm-7">
+                <input [(ngModel)]="solicitud.dbanda" class="form-control form-control-sm" type="text" id="banda" name="#solicitud.dbanda" maxlength="20" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="motivos" class="col-sm-3 col-form-label">Motivos:</label>
+            <div class="col-sm-7">
+                <textarea [(ngModel)]="solicitud.smotivos" class="form-control form-control-sm" type="text" id="motivos" name="#solicitud.smotivos" maxlength="250" required></textarea>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+        <button (click)="confirmarNuevaSolicitudRecurso()" type="button" [disabled]="registrarSolicitud.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+
+    </div>
+</form>

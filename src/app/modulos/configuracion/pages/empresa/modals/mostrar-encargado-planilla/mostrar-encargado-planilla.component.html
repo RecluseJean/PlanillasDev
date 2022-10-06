@@ -1,0 +1,135 @@
+<div class="modal-body">
+    <div class="col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px; flex: 0 0 98%; margin: 10px 5px;">
+        <div class="col-12 row" style="margin: 0;">
+            <div class="form-group col-7 mb-3" style="margin-top: 10px;">
+                <h4 class="modal-title">Encargados de planilla</h4>
+            </div>
+            <div class="form-group col-5 mb-3">
+                <button class="btn btn-sm color-page-button" (click)="registrarEncargadoPlan()" style="width: auto; border-radius: 28px;color: white;">Nuevo Encargado</button>
+            </div>
+        </div>
+        <div *ngIf="lsEncarPlan?.length == 0 && lsEncarPlanInac?.length == 0" style="padding: 30px 0px;">
+            <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                No cuenta con encargados de planilla registrados
+            </div>
+        </div>
+        <nav *ngIf="lsEncarPlan?.length > 0 || lsEncarPlanInac?.length > 0" class="mt-lg-1 mb-1" style="margin-top: 3%;">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-activo" data-toggle="tab" href="#nav-act" role="tab" aria-controls="nav-activo" aria-selected="true">Activo</a>
+                <a class="nav-item nav-link" id="nav-inactivo" data-toggle="tab" href="#nav-inac" role="tab" aria-controls="nav-inactivo" aria-selected="false">Inactivo</a>
+            </div>
+        </nav>
+        <div *ngIf="lsEncarPlan?.length > 0 || lsEncarPlanInac?.length > 0" class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-act" role="tabpanel" aria-labelledby="nav-act">
+                <div *ngIf="lsEncarPlan?.length == 0" style="padding: 30px 0px;">
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con encargados de planilla activos
+                    </div>
+                </div>
+                <div *ngIf="lsEncarPlan?.length > 0" class="col-12">
+                    <!-- <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center">Apellidos Nombre</th>
+                                    <th class="text-center">DNI</th>
+                                    <th class="text-center">Dar de Baja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let encPlan of lsEncarPlan">
+                                    <td>{{encPlan.trabajador.apePater}} {{encPlan.trabajador.apeMater}} {{encPlan.trabajador.nombres}}</td>
+                                    <td>{{encPlan.trabajador.nroDoc}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-account-remove" (click)="darBaja(encPlan)" aria-hidden="true" style="cursor: pointer; font-size: 23px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+
+                    <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                        <table mat-table [dataSource]="lsEncarPlan" style="width: 100%;">
+
+                            <ng-container matColumnDef="datos_perso">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;"> Apellidos Nombre</th>
+                                <td mat-cell *matCellDef="let element"> {{element.trabajador.apePater}} {{element.trabajador.apeMater}} {{element.trabajador.nombres}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="dni">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;">DNI </th>
+                                <td mat-cell *matCellDef="let element">{{element.trabajador.nroDoc}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="baja">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;"> Dar de Baja </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <i class="mdi mdi-account-remove color-page-i" (click)="darBaja(element)" aria-hidden="true" style="cursor: pointer; font-size: 23px;"></i>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-inac" role="tabpanel" aria-labelledby="nav-inac">
+                <div *ngIf="lsEncarPlanInac?.length == 0" style="padding: 30px 0px;">
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con encargados de planilla inactivos
+                    </div>
+                </div>
+                <div *ngIf="lsEncarPlanInac?.length > 0" class="col-12">
+                    <!-- <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center">Apellidos Nombre</th>
+                                    <th class="text-center">DNI</th>
+                                    <th class="text-center">Activar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let encPlanInac of lsEncarPlanInac">
+                                    <td>{{encPlanInac.trabajador.apePater}} {{encPlanInac.trabajador.apeMater}} {{encPlanInac.trabajador.nombres}}</td>
+                                    <td>{{encPlanInac.trabajador.nroDoc}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-account-check" (click)="activar(encPlanInac)" aria-hidden="true" style="cursor: pointer; font-size: 23px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                    <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+                        <table mat-table [dataSource]="lsEncarPlanInac" style="width: 100%;">
+
+                            <ng-container matColumnDef="datos_perso">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;"> Apellidos Nombre</th>
+                                <td mat-cell *matCellDef="let element"> {{element.trabajador.apePater}} {{element.trabajador.apeMater}} {{element.trabajador.nombres}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="dni">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;">DNI </th>
+                                <td mat-cell *matCellDef="let element">{{element.trabajador.nroDoc}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="baja">
+                                <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff;"> Activar </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <i class="mdi mdi-account-check color-page-i" (click)="activar(element)" aria-hidden="true" style="cursor: pointer; font-size: 23px;"></i>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+</div>

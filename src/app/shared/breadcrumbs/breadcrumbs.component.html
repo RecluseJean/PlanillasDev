@@ -1,0 +1,13 @@
+<div class="row page-titles" style="margin-top: -10px;height: 40px; background: transparent;" *ngIf="mostrar">
+    <div style="width: 100%; margin:0px 1%">
+        <div class="float-left">
+            <img src="{{icono}}" alt="i" style="width: 35px; filter: opacity(0.7); margin-left: 20px; margin-bottom: 10px;" />
+            <!-- <i [class]="icono" style="font-size: 35px;"></i> -->
+            <span class="text-themecolor color-page-i">{{label}}</span>
+        </div>
+        <!-- <div class="float-right">
+            <i class="mdi mdi-clock-end" style="font-size: 35px;"></i>
+            <span><countdown class="text-themecolor" [config]="config" (finished)="onFinished()" (notify)="onNotify($event)"></countdown></span>
+        </div> -->
+    </div>
+</div>

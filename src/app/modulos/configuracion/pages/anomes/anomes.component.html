@@ -1,0 +1,90 @@
+<hr>
+
+<div class="card-body" style="border-radius: 10px; padding: 0px 30px; margin-bottom: 20px;">
+    <div class="card-header row" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin: 10px 20px;">
+        <div class="col-6" style="margin: 0;">
+            <mat-form-field style="width: 335px; margin-right: 90px; margin-left: 20px;">
+                <mat-label>Buscar :</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+
+        <div class="col-6" style="margin: 0;">
+            <div class="form-group mt-3 mb-2">
+                <button class="btn btn-sm color-page-button" (click)="nuevoAno()" style="width: auto; border-radius: 28px;color: white;">Nuevo Año</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12">
+
+        <div class="table-responsive" style="opacity: 0.9; border-radius: 15px; box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.35);">
+            <table mat-table [dataSource]="lsMeses" style="width: 100%;">
+
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: left;"> Mes</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.descripcion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="abrev">
+                    <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: left;">Abreviatura </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">{{element.abrev}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="diasFeriadoCalend">
+                    <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;">Cantidad de feriados </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">{{element.diasFeriadoCalend}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="feriados">
+                    <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Feriados </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <i class="mdi mdi-calendar-plus color-page-i" aria-hidden="true" (click)="seleccionarFeriados(element)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef style=" font-weight: normal; font-size: 12px; color: #ffffff; text-align: center;"> Actualizar </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <i class="mdi mdi-pencil color-page-i" aria-hidden="true" (click)="actualizarMes(element)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-page-tr"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <mat-paginator #pag1 [pageSize]="itemsPerPage" [pageSizeOptions]="[5, 10, 25]" [length]="total_registros" showFirstLastButtons></mat-paginator> -->
+        </div>
+        <!-- <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Mes</th>
+                    <th class="text-center">Abreviatura</th>
+                    <th class="text-center">Cantidad de feriados</th>
+                    <th class="text-center">Dias Feriados</th>
+                    <th class="text-center">Actualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let mes of lsMeses | paginate: { id: 'paginationAnoMes', itemsPerPage: numItem, currentPage: pA }">
+                    <td>{{mes.descripcion}}</td>
+                    <td class="text-center">{{mes.abrev}}</td>
+                    <td class="text-center">{{mes.diasFeriadoCalend}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-calendar-plus" (click)="seleccionarFeriados(mes)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" (click)="actualizarMes(mes)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls id="paginationAnoMes" (pageChange)="pA = $event" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
+    </div> -->
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<form #nuevaAsist="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h2 class="modal-title text-center">{{input_asistencia==null?'Registrar':'Actualizar'}} Asistencia</h2>
+    </div>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-general-horario" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">Dia</a>
+            <a class="nav-item nav-link" id="nav-horario-dia" data-toggle="tab" href="#nav-dia" role="tab" aria-controls="nav-dia" aria-selected="false">Ingreso/Salida</a>
+            <a class="nav-item nav-link" id="nav-horario-amuerzo" data-toggle="tab" href="#nav-almuerzo" role="tab" aria-controls="nav-almuerzo" aria-selected="false">Almuerzo</a>
+        </div>
+    </nav>
+    <div class="modal-body">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-horario">
+                <div class="col-12 mr-3" style="border:1px solid #d6d6d6; border-radius:15px; padding:10px 10px;">
+                    <div class="form-row col-12" style="padding-top: 10px;">
+                        <div class="col-12 mb-3">
+                            <label for="desc">Selecciona el dia a registrar</label>
+                            <ejs-datepicker [disabled]='input_asistencia!=null' format='yyyy/MM/dd' type="datepicker" id='datepicker' placeholder='Elige una fecha' [(ngModel)]="asistencia.fecha" [strictMode]='true' [min]='minDate' [max]='maxDate' name="#asistencia.fecha" required>
+                            </ejs-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-dia" role="tabpanel" aria-labelledby="nav-horario-dia">
+                <div class="col-12 mr-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding:10px 10px;">
+                    <div class="form-row col-12" style="padding-top: 10px;">
+                        <div class="col-6 mb-3">
+                            <label for="iniDia">Hora Inicio:</label>
+                            <ejs-timepicker placeholder="00:00 AM/PM" id="iniDia" name="#asistencia.horIniDia" [(ngModel)]="asistencia.horIniDia" required></ejs-timepicker>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="finDia">Horario Fin:</label>
+                            <ejs-timepicker placeholder="00:00 AM/PM" id="finDia" name="#asistencia.horFinDia" [(ngModel)]="asistencia.horFinDia"></ejs-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-almuerzo" role="tabpanel" aria-labelledby="nav-horario-almuerzo">
+                <div class="col-12 mr-3" style="border:1px solid #d6d6d6; border-radius: 15px; padding:10px 10px;">
+                    <div class="form-row col-12" style="padding-top: 10px;">
+                        <div class="col-6 mb-3">
+                            <label for="iniAlm">Hora Inicio:</label>
+                            <ejs-timepicker placeholder="00:00 AM/PM" id='iniAlm' [(ngModel)]="asistencia.horIniAlmu" name="#asistencia.horIniAlmu"> </ejs-timepicker>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="finAlm">Horario Fin:</label>
+                            <ejs-timepicker placeholder="00:00 AM/PM" id="finAlm" name="#hasistencia.horFinAlmu" [(ngModel)]="asistencia.horFinAlmu"></ejs-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" id="cerrar" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" (click)="crud()" id="confirmar" class="btn btn-info btn-sm min" [disabled]="nuevaAsist.form.invalid" style="margin: 0px 5px;">{{input_asistencia==null?'Registrar':'Actualizar'}}</button>
+    </div>
+</form>

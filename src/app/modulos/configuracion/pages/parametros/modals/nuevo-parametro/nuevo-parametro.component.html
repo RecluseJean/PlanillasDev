@@ -1,0 +1,35 @@
+<form #nuevoParam="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{parametro.accion=="U"?'Actualizar':'Registrar'}} Parametro</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12 mt-3">
+                <div *ngIf="varSelPar && varSelParR" class="col-8 mb-3">
+                    <label for="nompar">Nombre:</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="nompar" value="{{parametro.descripcion}}" disabled>
+                </div>
+                <div *ngIf="!varSelPar || !varSelParR" class="col-5 mb-3">
+                    <label for="nompar">Nombre:</label>
+                    <input class="form-control form-control-sm" type="text" maxlength="45" id="nompar" value="{{parametro.descripcion}}" disabled>
+                </div>
+                <div class="col-4 mb-3" *ngIf="!varInpPar">
+                    <label for="valpar">Valor:</label>
+                    <input [(ngModel)]="parametro.valor" id="inputPar" class="form-control form-control-sm" type="number" id="valpar" name="#parametro.valor" (keypress)="verificarNumero($event)" required>
+                </div>
+                <div class="col-7 mb-3" *ngIf="!varSelPar">
+                    <label for="valpara">Valor:</label>
+                    <ng-select [items]="lsTipoTardanza" bindLabel="descripcion" bindValue="val" placeholder="seleccione" [(ngModel)]="parametro.valor" name="#parametro.valor" id="selParTipTar" required></ng-select>
+                </div>
+                <div class="col-7 mb-3" *ngIf="!varSelParR">
+                    <label for="valpara">Valor:</label>
+                    <ng-select [items]="lsTipoRango" bindLabel="descripcion" bindValue="val" placeholder="seleccione" [(ngModel)]="parametro.valor" name="#parametro.valor" id="selParRanMin" required></ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevoParametro()" [disabled]="nuevoParam.form.invalid" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

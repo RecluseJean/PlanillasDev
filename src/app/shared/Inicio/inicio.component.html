@@ -1,0 +1,103 @@
+<div id="main-wrapper">
+    <app-header></app-header>
+
+    <app-sidebar></app-sidebar>
+
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper" style="background-image:url(../../../assets/images/background/fondo1.jpg);background: rgb(240 248 255 / 86%);">
+
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+
+            <app-breadcrumbs></app-breadcrumbs>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <hr>
+            <div class="col-12">
+                <mat-tab-group mat-align-tabs="start" [selectedIndex]="selected.value" (selectedTabChange)="yourFn($event)">
+                    <mat-tab *ngFor="let mod of lsmenu" label="{{mod.descripcion}}">
+                        <div>
+                            <div class="col-12">
+                                <p *ngIf="mod.orden == 1" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la gestión de cuentas de usuarios y roles.</p>
+                                <p *ngIf="mod.orden == 2" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la gestión de los trabajadores, registro, asistencias, derechos, etc.</p>
+                                <p *ngIf="mod.orden == 3" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la gestión de boletas, cuestiones de sueldo y vacaciones.</p>
+                                <p *ngIf="mod.orden == 4" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la gestión de la contabilidad.</p>
+                                <p *ngIf="mod.orden == 5" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la gestión de los equipos.</p>
+                                <p *ngIf="mod.orden == 6" style="font-size: 17px; text-align: center; margin: 30px auto;">Módulo para la creación de empresas y sus distintos elementos necesarios para registrar Trabajadores, asi como el manejo de parámetros propios de cada empresa, fechas, y servicios terceros.</p>
+                                <div class="container" style="height: 100vh;">
+                                    <div class="row">
+                                        <div class="col-3" *ngFor="let pag of mod.lspagina" style="margin: auto;">
+                                            <div style="box-shadow: -8px 8px 14px 0 rgba(25,42,70,0.18); border-radius: 15px; cursor: pointer; width: 100%; height: 140px;" routerLinkActive="active" [routerLink]="[ pag.url ]">
+                                                <div style="height: inherit;">
+                                                    <div style="padding-top: 15px; padding-bottom: 6px;">
+                                                        <img src="../../assets/images/icon/svg/paginaSVG/{{pag.icono}}" alt="homepage" style="width: 80px; display: block; margin: auto;" />
+                                                    </div>
+                                                    <div>
+                                                        <h5 style="color: black; text-align: center; font-size: 18px; font-weight: normal; line-height: 1.1;">{{pag.descripcion}}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <!-- <div class="col-12 m-3 pt-4">
+                <div class="row">
+                    <div class="col-4" *ngFor="let menu of lsmenu">
+                        <div class="card " style="border:1px solid #d6d6d6; border-radius: 15px; ">
+                            <div class="card-header frost-theme " style="border-top-left-radius: 15px;border-top-right-radius: 15px; ">
+                                <img src="../../assets/images/icon/svg/{{menu.icono}}" alt="i" style="width: 35px; filter: opacity(0.7); margin-left: 20px; margin-bottom: 10px;" />
+                                <span class="card-title text-white " style="font-size: 20px; font-weight: bold; margin-left: 20px ">{{menu.descripcion}}</span>
+                            </div>
+                            <div class="card-body ">
+                                <p class="card-text font-18" *ngIf="menu.orden == 1">Modulo para la gestion de cuentas de usuarios y roles.</p>
+                                <p class="card-text font-18" *ngIf="menu.orden == 2">Modulo para la gestion de los trabajadores, registro, asistencias, derechos, etc.</p>
+                                <p class="card-text font-18" *ngIf="menu.orden == 3">Modulo para la gestion de boletas, cuestiones de sueldo y vacaciones.</p>
+                                <p class="card-text font-18" *ngIf="menu.orden == 4">Modulo para la gestion de la contabilidad.</p>
+                                <p class="card-text font-18" *ngIf="menu.orden == 5">Modulo para la gestion de equipo.</p>
+                                <p class="card-text font-18" *ngIf="menu.orden == 6">Modulo para la creacion de empresas y sus distintos elementos necesarios para registrar Trabajadores, asi como el manejo de parametros propios de cada empresa, fechas, y servicios terceros.</p>
+                                <ul class="list-group list-group-flush">
+                                    <div *ngFor="let pagina of menu.lspagina">
+                                        <li class="list-group-item ">■
+                                            <a [routerLink]="[pagina.url] " class="card-link pl-2 font-16 ">{{pagina.descripcion}}</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- ============================================================== -->
+            <!-- End Page Content -->
+            <!-- ============================================================== -->
+
+            <!-- Right sidebar -->
+            <!-- ============================================================== -->
+            <!-- .right-sidebar -->
+
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
+            <app-setting></app-setting>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- END Page wrapper  -->
+    <!-- ============================================================== -->
+</div>

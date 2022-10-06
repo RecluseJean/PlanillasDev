@@ -1,0 +1,62 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar " style="box-shadow: 2px 1px 26px 0px rgba(0,0,0,0.75);background-image: url(../../../assets/images/background/fondo1.jpg);background-size: cover;">
+    <div class="left-sidebar2" style="height: 920px; opacity: 0.9;">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="user-profile">
+                        <a class="has-arrow waves-effect waves-dark" (click)="collapsePerfil()" [attr.aria-expanded]="openPerfil">
+                            <!-- <img [src]="usuario.img | imagen:'usuario':usuario._id" alt="user" /> -->
+                            <span class="hide-menu text-active" style="margin-right: 6px;">Usuario:</span>
+                            <span class="hide-menu pl-4">{{token.username}}</span>
+                        </a>
+                        <a class="waves-effect waves-dark">
+                            <!-- <img [src]="usuario.img | imagen:'usuario':usuario._id" alt="user" /> -->
+                            <span class="hide-menu text-active" style="margin-right: 22px;">Perfil:</span>
+                            <span class="hide-menu pl-4">{{token.nombre_perfil}}</span>
+                        </a>
+                        <a *ngIf="token.id_perfil!=1" class="waves-effect waves-dark">
+                            <!-- <img [src]="usuario.img | imagen:'usuario':usuario._id" alt="user" /> -->
+                            <span class="hide-menu  text-active">Empresa:</span>
+                            <span class="hide-menu pl-4">{{token.empresa.razonSocial}}</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" [class.collapse]="openPerfil">
+                            <li><a (click)="_usuarioService.logout()" class="pointer">Salir</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-devider"></li>
+
+
+
+                    <li *ngFor="let menu of lsmenu" [ngClass]="menu.open?'active':''">
+                        <a class="has-arrow waves-effect waves-light " (click)="toggleCollapse(menu.idModulo)" [attr.aria-expanded]="menu.open">
+                            <!-- <i [class]="menu.icono"></i> -->
+                            <img src="../../assets/images/icon/svg/{{menu.icono}}" alt="i" style="width: 30px; opacity: 0.7" />
+                            <span class="hide-menu pl-1">{{menu.descripcion}}</span>
+                        </a>
+                        <ul [class.collapse]="!menu.open" aria-expanded="false" class="collapse">
+                            <cdk-virtual-scroll-viewport [itemSize]="18 * 9" class="example-viewport">
+                                <li *ngFor="let submenu of menu.lspagina">
+                                    <a routerLinkActive="active" [routerLink]="[ submenu.url ]">
+                                        <!-- <i [class]="submenu.icono"></i> -->
+                                        <img src="../../assets/images/icon/svg/paginaSVG/{{submenu.icono}}" alt="i" style="width: 30px; opacity: 0.7" />
+                                        <span class="pl-1" style="color: white;">{{submenu.descripcion}}</span>
+                                    </a>
+                                </li>
+                            </cdk-virtual-scroll-viewport>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

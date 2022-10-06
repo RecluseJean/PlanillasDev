@@ -1,0 +1,26 @@
+<form #nuevaAreaDepEmp="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{areaDepartamentoEmpresa.accion=="U"?'Actualizar':'Registrar'}} Area de Departamento Empresa</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="nomdepemp">Nombre Area de Departamento Empresa</label>
+                    <input [(ngModel)]="areaDepartamentoEmpresa.snombre" class="form-control form-control-sm" type="text" id="nomdepemp" name="#areaDepartamentoEmpresa.snombre" maxlength="255" required>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="depEmp">Departamento Empresa</label>
+                        <ng-select [items]="lsDepartamentoEmpresa" bindLabel="snombre" bindValue="iidDepartamentoEmpresa" placeholder="Seleccione Departamento Empresa" id="depEmp" name="#departamentoEmpresa.iidDepartamentoEmpresa" [(ngModel)]="departamentoEmpresa.iidDepartamentoEmpresa"
+                            style="width: 100%; margin-right: 10px;" required></ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarNuevaAreaDepartamentoEmpresa()" type="button" [disabled]="nuevaAreaDepEmp.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

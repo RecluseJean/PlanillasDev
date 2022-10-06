@@ -1,0 +1,86 @@
+<form #nuevoPlanilla="ngForm" ngNativeValidate>
+    <div class="modal-header">
+        <h5 class="modal-title">Calculo Planilla</h5>
+        <h5 class="modal-title">PERIODO: {{pdo_mes.descripcion}}-{{pdo_ano.descripcion}}</h5>
+    </div>
+    <div class="modal-header justify-content-center">
+        <h5 class="modal-title">CANTIDADES ACUMULADAS POR MES</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12 mt-3">
+                <div class="col-4 mb-3">
+                    <label for="df">Dias Feriados</label>
+                    <input class="form-control form-control-sm" type="text" id="df" name="#dias_ferdo" [(ngModel)]="dias_ferdo" (ngModelChange)="calculoDiasComptbl($event,'df')" disabled>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="hext">Horas Extra 25%</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.ho_extra25" styles="" id="hext" [(ngModel)]="planilla.ho_extra25" (keypress)="validarCalculos($event,'')" (blur)="onBlurValidarNumeroEntero(planilla.ho_extra25,'hrex25')" required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="hextr">Horas Extra 35%</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.ho_extra35" id="hextr" [(ngModel)]="planilla.ho_extra35" (keypress)="validarCalculos($event,'')" (blur)="onBlurValidarNumeroEntero(planilla.ho_extra35,'hrex35')" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-4 mb-3">
+                    <label for="felab">Feriado Laborado</label>
+                    <input class="form-control form-control-sm" type="number" name="#ferdo_labrdo" id="felab" [(ngModel)]="ferdo_labrdo" (ngModelChange)="calculoDiasComptbl($event,'fl')" (keypress)="validarCalculos($event,'fl')" (blur)="onBlurValidarNumeroEntero(ferdo_labrdo,'fl')"
+                        required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="finj">Faltas Injustificadas</label>
+                    <input class="form-control form-control-sm" type="number" name="#falta_injust" id="finj" [(ngModel)]="falta_injust" (ngModelChange)="calculoDiasComptbl($event,'fi')" (keypress)="validarCalculos($event,'fi')" (blur)="onBlurValidarNumeroEntero(falta_injust,'fi')"
+                        required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="falt">Faltantes</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.faltantes" id="falt" [(ngModel)]="planilla.faltantes" (keypress)="validarCalculos($event,'')" (blur)="onBlurvalidarNumeroDecimal(planilla.faltantes,'falt')" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-4 mb-3">
+                    <label for="vactom">Vacaciones Tomadas</label>
+                    <input class="form-control form-control-sm" type="number" name="#dias_vacaciones" id="vactom" [(ngModel)]="dias_vacaciones" (ngModelChange)="calculoDiasComptbl($event,'dv')" (keypress)="validarCalculos($event,'dv')" (blur)="onBlurValidarNumeroEntero(dias_vacaciones,'dv')"
+                        required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="adel">Adelantos</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.adelanto" id="adel" [(ngModel)]="planilla.adelanto" (keypress)="validarCalculos($event,'')" (blur)="onBlurvalidarNumeroDecimal(planilla.adelanto,'adl')" required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="vacvend">Vacaciones Vendidas</label>
+                    <input class="form-control form-control-sm" type="number" name="#vacaciones_vend" id="vacvend" [(ngModel)]="vacaciones_vend" (keypress)="validarCalculos($event,'')" (blur)="onBlurvalidarNumeroDecimal(vacaciones_vend,'vv')" required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+
+                <div class="col-4 mb-3">
+                    <label for="tard">Tardanzas ({{desc_tardanza}})</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.tardanzas" id="tard" [(ngModel)]="planilla.tardanzas" (keypress)="validarCalculos($event,'')" (blur)="onBlurValidarNumeroEntero(planilla.tardanzas,'trd')" required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="pres">Préstamos</label>
+                    <input class="form-control form-control-sm" type="number" name="#dplanilla.prestamos" id="pres" [(ngModel)]="planilla.prestamos" (blur)="onBlurvalidarNumeroDecimal(planilla.prestamos,'pr')" required>
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="dcom">Comisiones</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.comisiones" id="comi" name="#planilla.comisiones" [(ngModel)]="planilla.comisiones" (keypress)="validarCalculos($event,'')" (blur)="onBlurvalidarNumeroDecimal(planilla.comisiones,'com')"
+                        required>
+                </div>
+            </div>
+            <div class="form-row col-12">
+                <div class="col-4 mb-3">
+                </div>
+                <div class="col-4 mb-3">
+                    <label for="dcom">Dias Computables</label>
+                    <input class="form-control form-control-sm" type="number" name="#planilla.dias_computables" id="dcom" [(ngModel)]="planilla.dias_computables" disabled required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="confirmarCalculoPlanilla()" [disabled]="nuevoPlanilla.form.invalid" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

@@ -1,0 +1,59 @@
+<form #nuevaActividad="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h2 class="modal-title text-center" style="color: white;">{{input_horario_final==null?"Nueva":"Actualizar"}} Actividad Recreativa</h2>
+    </div>
+
+    <div class="modal-body">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="col-12 mr-3" style="border:1px solid #d6d6d6; border-radius:15px; padding:10px 10px;">
+                <div class="form-row col-12" style="padding-top: 10px;">
+                    <div class="col-4 mb-3">
+                        <label for="areaDep">Area:</label>
+                        <ng-select [items]="lsDepartamentoEmpresa" bindLabel="snombre" bindValue="iidAreaDepartamentoEmpresa" id="areaDep" [(ngModel)]="iidAreaDepartamentoEmpresa" name="#iidAreaDepartamentoEmpresa" style="width: 100%; margin-right: 10px;" required></ng-select>
+
+                    </div>
+
+                    <div class="col-8 mb-3">
+                        <label for="asunt">Asunto</label>
+                        <textarea class="form-control" id="comentario" rows="3" style="width: 100%; height: 30px;" [(ngModel)]="actividades.asunto" name=#actividades.asunto required></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-row col-12" style="padding-top: 10px;">
+                    <div class="col-5 mb-3">
+                        <label for="fec_pub">Fecha Programación</label>
+                        <ejs-datepicker format='dd-MM-yyyy' type="datepicker" placeholder='Elige una fecha' [(ngModel)]="actividades.fecPub" name="#actividades.fecPub" required> </ejs-datepicker>
+                    </div>
+                    <div class="col-3 mb-3" style="margin-left: 30px;">
+                        <label for="iniDia">Hora Inicio:</label>
+                        <ejs-timepicker placeholder="00:00 AM/PM" id="iniDia" name="#actividades.horIniDia" [(ngModel)]="actividades.horIniDia" required></ejs-timepicker>
+                    </div>
+                    <div class="col-3 mb-3" style="margin-left: 30px;">
+                        <label for="finDia">Horario Fin:</label>
+                        <ejs-timepicker placeholder="00:00 AM/PM" id="finDia" name="#actividades.horFinDia" [(ngModel)]="actividades.horFinDia" required></ejs-timepicker>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="form-row col-12" style="padding-top: 20px;">
+                    <div class="col-12 mb-6">
+                        <label for="desc">Descripción</label>
+
+                        <textarea class="form-control" id="comentario" rows="3" style="margin-top: 10px; height: 150px;" [(ngModel)]="actividades.descripcion" name=#actividades.descripcion required></textarea>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="close()" id="cerrar" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" id="confirmar" class="btn btn-info btn-sm min" [disabled]="nuevaActividad.form.invalid" (click)="confirmarNuevaActividad()" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

@@ -1,0 +1,87 @@
+<div class="modal-body">
+    <div class="col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px; flex: 0 0 98%; margin: 10px 5px;">
+        <div class="col-12 row" style="margin: 0;">
+            <div class="form-group col-8 mb-3">
+                <h5 class="modal-title">Préstamos : </h5>
+            </div>
+        </div>
+        <div *ngIf="lsPrestamo?.length == 0" style="padding: 10px 0px;">
+            <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                No cuenta con prestamos registrados
+            </div>
+        </div>
+        <div *ngIf="lsPrestamo?.length > 0" class="table-responsive">
+            <div class="card example-2 square scrollbar-cyan bordered-cyan" style="overflow-x: hidden;">
+                <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                    <thead style="background: #ebeff5;">
+                        <tr>
+                            <th class="text-center" colspan="2">Fecha Solicitud</th>
+                            <th class="text-center">Fecha abono</th>
+                            <th class="text-center">Monto Total</th>
+                            <th class="text-center">Cuotas</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center" colspan="2">Archivo</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let prestamo of lsPrestamo" align="center">
+                        <tr style="font-size: 12px">
+                            <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                <a *ngIf="prestamo.expanded" (click)="prestamo.expanded = false;" class="efecctrotatecont">
+                                    <i class="mdi mdi-arrow-up-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                </a>
+                                <a *ngIf="!prestamo.expanded" (click)="prestamo.expanded = true; listarNroCuotas(prestamo)" class="efecctrotatecont">
+                                    <i class="mdi mdi-arrow-down-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                </a>
+                            </td>
+                            <td style="padding-top: 15px">{{prestamo.fechaSolicitud | date :'dd-MM-yyyy'}}</td>
+                            <td style="padding-top: 15px">{{prestamo.fechaAbono | date :'dd-MM-yyyy'}}</td>
+                            <td style="padding-top: 15px">{{prestamo.montoTotal.toFixed(2)}}</td>
+                            <td style="padding-top: 15px">{{prestamo.nroCuotas}}</td>
+                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo==undefined"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #ff0000;"></i></td>
+                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo!=undefined"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #f3ff00;"></i></td>
+                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo==undefined"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #ff8500 ;"></i></td>
+                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo!=undefined"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #02ff00 ;"></i></td>
+                            <td style="padding-top:8px; padding-bottom: 0px;" class="text-center" *ngIf="prestamo.nombreArchivo==null">
+                                <input type="file" (change)="subirArchivo($event, prestamo)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" class="form-control form-control-sm input-icon-z">
+                                <i class="mdi mdi-cloud-upload icon-z parpadea" aria-hidden="true"></i>
+                            </td>
+                            <td style="padding-top:8px; padding-bottom: 0px;" class="text-center" *ngIf="prestamo.nombreArchivo!=null">
+                                <i class="mdi mdi-cloud-download icon-z" (click)="bajarArchivo(prestamo)" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf="prestamo.expanded" style="font-size: 12px">
+                            <td colspan="7">
+                                <div class="form-row col-12" style="margin: 0 auto;">
+                                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                        <thead style="background: #ebeff5;">
+                                            <tr>
+                                                <th class="text-center">Mes</th>
+                                                <th class="text-center">Año</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Monto Mensual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody align="center">
+                                            <tr style="font-size: 12px" *ngFor="let cuota of prestamo.lscuotas">
+                                                <td>{{cuota.pdoMes.descripcion}}</td>
+                                                <td>{{cuota.pdoAno.descripcion}}</td>
+                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==0"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #ffd800;"></i>
+                                                </td>
+                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==1"> <i class="mdi mdi-emoticon" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #19E422 ;"></i>
+                                                </td>
+                                                <td>{{cuota.montoCuota.toFixed(2)}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+</div>

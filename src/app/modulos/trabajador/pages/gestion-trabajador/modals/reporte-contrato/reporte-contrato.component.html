@@ -1,0 +1,30 @@
+<div class="modal-header color-page-modal" style="justify-content: center;">
+    <h5 class="modal-title" style="font-size:15px;color: white;">Gestión de contrato</h5>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-row col-12 align-center" align="center">
+            <div class="col-12 mt-3">
+                <button type="button" id="descargar" (click)="descargarContrato()" class="btn btn-outline-success btn-sm min" style="width: 70%; margin: 0px 10px; padding: 0px;">
+                    <span style="font-size: 21px;"><i class="mdi mdi-cloud-download"></i></span>
+                    <label style="font-weight: bold;margin: 0px;font-size: 18px;cursor: pointer;">Bajar archivo</label>
+                </button>
+            </div>
+            <div class="col-12 mb-3 mt-3">
+                <button type="button" (click)="regisArchivo($event)" class="btn btn btn-outline-primary btn-sm min" style="width: 70%; margin: 0px 10px; padding: 0px;">
+                <span style="font-size: 21px;"><i class="mdi mdi-cloud-upload" ></i></span>
+                <label style="font-weight: bold;margin: 0px;font-size: 18px;cursor: pointer;">Subir archivo</label>
+                <span>
+                <!-- <input type="file" id="subir" (change)="subirContrato($event)"
+                accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"
+                class="form-control form-control-sm"
+                style="width:67%; position:absolute; height:100%; left:0px; opacity:0; transform: translateX(50px)"> -->
+                </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" modal-footer ">
+    <button (click)="close()" id="cerrar" type="button " class="btn btn-danger btn-sm min" style="margin: 0px 5px; ">Cancelar</button>
+</div>

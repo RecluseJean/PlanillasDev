@@ -1,0 +1,43 @@
+<form #nuevoPuestoAreaEmp="ngForm" ngNativeValidate>
+    <div class="modal-header color-page-modal">
+        <h5 class="modal-title" style="color: white;">{{proyeccion.accion=="U"?'Actualizar':'Registrar'}} Puesto Área Empresa</h5>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="nompuestoareaemp">Nombre del Puesto</label>
+                    <input [(ngModel)]="puesto.snombre" class="form-control form-control-sm" type="text" id="nompuestoareaemp" name="#puesto.snombre" maxlength="45" required>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="areaDepEmp">Área Departamento Empresa</label>
+                        <ng-select [items]="lsAreaDepa" bindLabel="snombre" bindValue="iidAreaDepartamentoEmpresa" placeholder="Seleccione un area" id="areaDepEmp" name="#iidAreaDepa" [(ngModel)]="iidAreaDepa" style="width: 100%; margin-right: 10px;" required></ng-select>
+                    </div>
+                </div>
+
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="catPuesto">Categoria</label>
+                        <ng-select [items]="lsCategoria" bindLabel="descripcion" bindValue="idCategoria" placeholder="Seleccione Categoria" id="catPuesto" name="#puesto.scategoria" [(ngModel)]="puesto.scategoria" style="width: 100%; margin-right: 10px;" required></ng-select>
+                    </div>
+                </div>
+
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="pCargo">Proyección Cargo</label>
+                        <ng-select [items]="lsProyeccionCargo" bindLabel="snombre" bindValue="iidPuesto" placeholder="Proyeccion Cargo" id="pCargo" name="#idPuestoJefe" [(ngModel)]="idPuestoJefe" style="width: 100%; margin-right: 10px;">
+                        </ng-select>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button (click)="openModalConfirmar()" type="button" [disabled]="nuevoPuestoAreaEmp.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>
