@@ -7,6 +7,7 @@ import { Solicitud } from '../../../../../../models/Solicitud';
 import { SolicitudService } from '../../../../services/solicitud/solicitud.service';
 import { ConfirmarNuevaSolicitudComponent } from '../confirmar-nueva-solicitud/confirmar-nueva-solicitud.component';
 import { Empresa } from '../../../../../../models/Empresa';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nueva-solicitud-empresa',
@@ -66,7 +67,12 @@ export class NuevaSolicitudEmpresaComponent implements OnInit {
   }
 
   confirmarNuevaSolicitudRecurso() {
-    this.openModalConfirmar();
+    if((""+this.iidPuesto).trim()=='' || (""+this.solicitud.dbanda).trim()=='' || (""+this.solicitud.smotivos).trim()=='' || this.iidPuesto==undefined || this.solicitud.dbanda==undefined || this.solicitud.smotivos==undefined){
+      this.abrirSnack("Complete todos los campos");
+      return
+    }else {
+      this.openModalConfirmar();
+    }
   }
 
   public openModalConfirmar() {
@@ -100,6 +106,14 @@ export class NuevaSolicitudEmpresaComponent implements OnInit {
       } */
     } 
     return solicitudDTO;
+  }
+
+  abrirSnack(msg:string){
+    Swal.fire({
+      title: msg,
+      timer: 1500,
+      showConfirmButton: false
+    });
   }
 
 }
