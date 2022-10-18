@@ -78,7 +78,7 @@ export class PrevArchivoComponent implements OnInit {
     this.contr = contrato;
   }
 
-  elegir(archivo){ debugger
+  elegir(archivo){ //debugger
     switch(this.objArch.accion){
       case 'DHRA': this.subirArchivoDHRA(archivo,this.derHab); break;
       case 'ASUE': this.subirArchivoAdeSue(archivo,this.adeSue); break;

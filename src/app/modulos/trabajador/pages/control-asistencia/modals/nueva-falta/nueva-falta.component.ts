@@ -58,7 +58,7 @@ export class NuevaFaltaComponent implements OnInit {
     this.maxDate = new Date(fecha2)
   }
 
-  subirArchivo(event) { debugger
+  subirArchivo(event) { //debugger
     this.selecArch = event.target.files[0];
     this.nombreArchivo = event.target.files[0].name;
   }
@@ -83,7 +83,7 @@ export class NuevaFaltaComponent implements OnInit {
     }
   }
 
-  actualizarFalta() { debugger
+  actualizarFalta() { //debugger
     var tmp = this.asignarObjetos();
     this.faltaService.actualizarFalta(tmp).subscribe((resp: any) => {
       if (resp.estado == 1) {
@@ -103,7 +103,7 @@ export class NuevaFaltaComponent implements OnInit {
     })
   }
 
-  registrarFalta(tmp) { debugger
+  registrarFalta(tmp) { //debugger
     this.faltaService.registrarFalta(tmp).subscribe((resp: any) => {
       if (resp.estado == 1) {
         if (this.selecArch != null) {

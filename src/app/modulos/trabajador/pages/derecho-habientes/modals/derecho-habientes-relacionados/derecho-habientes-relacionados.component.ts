@@ -38,6 +38,7 @@ export class DerechoHabientesRelacionadosComponent implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
+    console.log("derecho habientes relacionados")
     this.trabajador = this.input_trabajador;
     this.listarDereHabActivo();
     this.listarDereHabInactivo();
@@ -87,6 +88,7 @@ export class DerechoHabientesRelacionadosComponent implements OnInit {
   }
 
   openModal(indice) {
+    console.log("modal")
     if (indice.accion == "DHRA") {
       this.modalRef = this.modalService.open(PrevArchivoComponent, 
         {

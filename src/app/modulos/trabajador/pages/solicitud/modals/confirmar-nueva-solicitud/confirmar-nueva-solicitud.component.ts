@@ -29,6 +29,7 @@ export class ConfirmarNuevaSolicitudComponent implements OnInit {
   solicitudDto:any;
   
   ngOnInit() {
+    console.log("confirmar solicitud")
     this.solicitudDto = this.input_solicitud;
     this.trabajador = JSON.parse(localStorage.getItem('InfoToken')).trabajador;   
     

@@ -27,6 +27,7 @@ export class ConfirmarEliminarSolicitudComponent implements OnInit {
   public solicitud:any = new Solicitud(); 
 
   ngOnInit() {
+    console.log("confirmar eliminar solicitud")
     this.solicitud = this.input_solicitudDto;
     
   }

@@ -29,7 +29,7 @@ export class ConfirmarEliminarComponent implements OnInit {
     this.objGestion = this.input_accion;
   }
 
-  crud(){debugger
+  crud(){//debugger
     switch(this.objGestion.accion){
       case 'A' : this.eliminarAsistencia() ;
       break;
@@ -67,7 +67,7 @@ export class ConfirmarEliminarComponent implements OnInit {
     })
   }
 
-  eliminarPermiso(){debugger
+  eliminarPermiso(){//debugger
     this.permisoService.eliminarPermiso(this.objGestion.idPermiso).subscribe((resp:any)=>{debugger
       if(resp.defaultObj){
         Swal.fire(Constantes.SUCCESS,resp.msg,'success');

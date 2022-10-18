@@ -36,12 +36,13 @@ export class NuevaSolicitudEmpresaComponent implements OnInit {
   token: any;
 
   ngOnInit() {
+    console.log("nueva solicitud empresa")
     this.empresa = JSON.parse(localStorage.getItem('objEmpresaSeleccion'));
     this.solicitud = this.input_solicitud;
     this.trabajador = JSON.parse(localStorage.getItem('InfoToken')).trabajador;
     //console.log(this.trabajador);
     //this.listarPuestoPorOrden();
-    if(this.trabajador!=null){debugger
+    if(this.trabajador!=null){//debugger
        this.listarPuestoPorOrden();
        this.listarPuesto();
     }else {this.listarPuesto(); }
@@ -53,13 +54,13 @@ export class NuevaSolicitudEmpresaComponent implements OnInit {
     this.activemodal.dismiss('Cancelado');
   }
 
-  listarPuestoPorOrden() {debugger
+  listarPuestoPorOrden() {//debugger
     this.solicitudService.listarPuestoPorOrden(this.trabajador).subscribe((resp: any) => {
       this.lsPuestoProyOrden = resp.aaData;
     })
   }
 
-  listarPuesto() {debugger
+  listarPuesto() {//debugger
     this.solicitudService.listarPuestoAreaEmp(this.empresa).subscribe((resp: any) => {
       this.lsPuesto = resp.aaData;
       console.log('lsPuestoGen',resp.aaData);

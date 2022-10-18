@@ -155,7 +155,7 @@ export class NuevoPermisoComponent implements OnInit {
     })
   }
 
-  asignarObjetos(): any { debugger
+  asignarObjetos(): any { //debugger
     this.llenarDropdown();
     var tmp = {
       "idPermiso": this.permiso.idPermiso,

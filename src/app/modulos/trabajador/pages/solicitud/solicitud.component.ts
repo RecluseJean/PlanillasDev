@@ -74,7 +74,7 @@ export class SolicitudComponent implements OnInit {
     this.usuario = JSON.parse(localStorage.getItem('InfoToken'));
 
     if(this.empresa!=null) {
-      if (this.infoToken.id_perfil!= 4) {debugger
+      if (this.infoToken.id_perfil!= 4) {//debugger
         this.listarSolicitudxEmpresa();
         this.listarTrabajadoresxEmpresa();  
       } else {
@@ -97,7 +97,7 @@ export class SolicitudComponent implements OnInit {
       this.lsSolicitudxEmpresaFilter = resp.aaData;
       this.lsSolicitudxEmpresa = new MatTableDataSource<Object>(this.lsSolicitudxEmpresaFilter);
       this.lsSolicitudxEmpresa.paginator = this.paginator;
-      //console.log('lsSolicitudxEmpresa',resp.aaData);
+      console.log('lsSolicitudxEmpresa',resp.aaData);
     })
   }
 
