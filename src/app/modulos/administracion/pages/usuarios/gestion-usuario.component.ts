@@ -25,6 +25,7 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'nomusu',
+    'documento',
     'correo',
     'rol',
     'estado',
@@ -63,6 +64,7 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
         lsUsuariosFilter = resp.aaData;
         this.lsUsuarios = new MatTableDataSource<Usuario>(lsUsuariosFilter);
         this.lsUsuarios.paginator = this.paginator;
+        console.log("xx", this.lsUsuarios)
       }
     })
   }
