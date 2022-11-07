@@ -25,7 +25,6 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'nomusu',
-    'documento',
     'correo',
     'rol',
     'estado',
