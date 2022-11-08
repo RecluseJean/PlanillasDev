@@ -79,12 +79,14 @@ export class EmpresaComponent implements OnInit, OnDestroy {
     this.token= JSON.parse(localStorage.getItem('InfoToken'));
     this.empresa= JSON.parse(localStorage.getItem('objEmpresaSeleccion'));
 
-    if(this.token.id_perfil == 1){debugger
+    if(this.token.id_perfil == 1 && this.empresa == null ){//debugger
     this.gestionarTabs();
     this.listarEmpresa();
     this.listarEmpresaInactiva();
     }else{
+    this.gestionarTabs();
     this.listarEmpresaxPerfil();
+    this.listarEmpresaInactiva();
     }
 
   }
@@ -161,6 +163,9 @@ export class EmpresaComponent implements OnInit, OnDestroy {
     tmp.accion = "DB";
     this.empresaService.darBajaEmpresa(empresa).subscribe((resp: any) => {
       Swal.fire(Constantes.SUCCESS, resp.msg, 'success');
+      localStorage.removeItem('objEmpresaSeleccion');
+      localStorage.removeItem('anoSeleccion');
+      localStorage.removeItem('mesSeleccion');
       this.refrescar(this.router.url);
     });
     // this.openModal(tmp);
