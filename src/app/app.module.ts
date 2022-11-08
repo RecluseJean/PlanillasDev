@@ -22,7 +22,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalInterceptor } from './global.interceptor';
 import { TreeTableModule } from "ng-treetable";
 //modulos
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+//import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -70,7 +70,7 @@ registerLocaleData(localesPE, 'es-Pe');
     SharedModule,
     Ng4LoadingSpinnerModule.forRoot(),
     TreeTableModule,
-    Ng2SmartTableModule,
+    //Ng2SmartTableModule,
     NgbModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),

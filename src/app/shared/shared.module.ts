@@ -17,7 +17,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, } from '@angular/forms';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 // import { CountdownModule } from 'ngx-countdown';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+//import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
 import { ConfirmarAsistenciaComponent } from './asistencia/modal/confirmar-asistencia/confirmar-asistencia.component';
 import { SettingComponent } from './setting/setting.component';
@@ -41,7 +41,7 @@ import { PrevArchivoComponent } from './prev-archivo/prev-archivo.component';
     // HttpModule,
     FormsModule,
     // CountdownModule,
-    Ng2SmartTableModule,
+    //Ng2SmartTableModule,
     MaterialModule,
     ScrollingModule
   ],

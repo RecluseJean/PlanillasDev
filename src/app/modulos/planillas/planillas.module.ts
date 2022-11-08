@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { TreeTableModule } from 'ng-treetable';
 
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+//import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgSelectModule } from '@ng-select/ng-select'
@@ -75,7 +75,7 @@ import { ConfirmarPrestamoComponent } from './pages/prestamo/modals/confirmar-pr
     // HttpModule,
     PipesModule,
     TreeTableModule,
-    Ng2SmartTableModule,
+    //Ng2SmartTableModule,
     NgbModule,
     EditorModule,
     NgSelectModule,
