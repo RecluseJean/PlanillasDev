@@ -37,10 +37,10 @@
                             <td style="padding-top: 15px">{{prestamo.fechaAbono | date :'dd-MM-yyyy'}}</td>
                             <td style="padding-top: 15px">{{prestamo.montoTotal.toFixed(2)}}</td>
                             <td style="padding-top: 15px">{{prestamo.nroCuotas}}</td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo==undefined"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #ff0000;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo!=undefined"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #f3ff00;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo==undefined"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #ff8500 ;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo!=undefined"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #02ff00 ;"></i></td>
+                            <td style="color: #ff0000;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo==undefined">Préstamo activa</td>
+                            <td style="color: #f3ff00;" *ngIf="prestamo.estado==0 && prestamo.nombreArchivo!=undefined">En Proceso</td>
+                            <td style="color: #ff8500;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo==undefined">En Proceso</td>
+                            <td style="color: #02ff00;" *ngIf="prestamo.estado==1 && prestamo.nombreArchivo!=undefined">Culminado</td>
                             <td style="padding-top:8px; padding-bottom: 0px;" class="text-center" *ngIf="prestamo.nombreArchivo==null">
                                 <input type="file" (change)="subirArchivo($event, prestamo)" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" class="form-control form-control-sm input-icon-z">
                                 <i class="mdi mdi-cloud-upload icon-z parpadea" aria-hidden="true"></i>
@@ -65,9 +65,9 @@
                                             <tr style="font-size: 12px" *ngFor="let cuota of prestamo.lscuotas">
                                                 <td>{{cuota.pdoMes.descripcion}}</td>
                                                 <td>{{cuota.pdoAno.descripcion}}</td>
-                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==0"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #ffd800;"></i>
+                                                <td style="color: #f3ff00;" *ngIf="cuota.estado==0">Pendiente
                                                 </td>
-                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==1"> <i class="mdi mdi-emoticon" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #19E422 ;"></i>
+                                                <td style="color: #02ff00 ;" *ngIf="cuota.estado==1">Culminado
                                                 </td>
                                                 <td>{{cuota.montoCuota.toFixed(2)}}</td>
                                             </tr>

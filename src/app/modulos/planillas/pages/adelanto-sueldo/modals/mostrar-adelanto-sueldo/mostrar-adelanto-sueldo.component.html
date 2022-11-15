@@ -37,10 +37,10 @@
                             <td style="padding-top: 15px">{{adeSueldo.tipo==1?'Proporcional':'Emergencia'}}</td>
                             <td style="padding-top: 15px">{{adeSueldo.montoTotal.toFixed(2)}}</td>
                             <td style="padding-top: 15px">{{adeSueldo.nroCuotas}}</td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="adeSueldo.estado==0 && adeSueldo.nombreArchivo==null"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #ff0000;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="adeSueldo.estado==0 && adeSueldo.nombreArchivo!=null"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="font-size: 30px; color: #f3ff00;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="adeSueldo.estado==1 && adeSueldo.nombreArchivo==null"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #ff8500 ;"></i></td>
-                            <td style="padding-top: 6px; padding-bottom: 4px;" *ngIf="adeSueldo.estado==1 && adeSueldo.nombreArchivo!=null"> <i class="mdi mdi-emoticon" aria-hidden="true" style="font-size: 30px; color: #02ff00 ;"></i></td>
+                            <td style="color: #ff0000;" *ngIf="adeSueldo.estado==0 && adeSueldo.nombreArchivo==null">Adelanto activa</td>
+                            <td style="color: #f3ff00;" *ngIf="adeSueldo.estado==0 && adeSueldo.nombreArchivo!=null">En Proceso</td>
+                            <td style="color: #ff8500;" *ngIf="adeSueldo.estado==1 && adeSueldo.nombreArchivo==null">En Proceso</td>
+                            <td style="color: #02ff00;" *ngIf="adeSueldo.estado==1 && adeSueldo.nombreArchivo!=null">Culminado</td>
                             <!-- <td *ngIf="adeSueldo.estado==0"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="cursor: pointer; font-size: 23px; color: #F1E00D;"></i></td>
                         <td *ngIf="adeSueldo.estado==1"> <i class="mdi mdi-emoticon" aria-hidden="true" style="cursor: pointer; font-size: 23px; color: #19E422 ;"></i></td> -->
                             <td style="padding-top: 15px">{{adeSueldo.fechaSol | date :'dd-MM-yyyy'}}</td>
@@ -81,9 +81,9 @@
                                             <tr style="font-size: 12px" *ngFor="let cuota of adeSueldo.lscuotas">
                                                 <td>{{cuota.pdoMes.descripcion}}</td>
                                                 <td>{{cuota.pdoAno.descripcion}}</td>
-                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==0"> <i class="mdi mdi-emoticon-neutral" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #ffd800;"></i>
+                                                <td style="color: #ffd800;" *ngIf="cuota.estado==0">Pendiente
                                                 </td>
-                                                <td style="padding: 4px 0px 0px 0px;" *ngIf="cuota.estado==1"> <i class="mdi mdi-emoticon" aria-hidden="true" style="cursor: pointer; font-size: 25px; color: #19E422 ;"></i>
+                                                <td style="color: #19E422;" *ngIf="cuota.estado==1">Culminado
                                                 </td>
                                                 <td>{{cuota.montoCuota.toFixed(2)}}</td>
                                             </tr>
