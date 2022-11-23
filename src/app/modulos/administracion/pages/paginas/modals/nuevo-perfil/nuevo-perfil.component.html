@@ -1,0 +1,25 @@
+<form #nuevoPerf="ngForm" ngNativeValidate>
+
+    <div class="modal-header color-page-modal">
+        <h2 class="modal-title text-center" style="color: white;">Nuevo Perfil</h2>
+    </div>
+    <div class="modal-body">
+        <div class="form-row col-12 mt-3">
+            <div class="col-12 mb-3">
+                <label for="nomperf">Nombre del Perfil</label>
+                <input class="form-control form-control-sm" [(ngModel)]="perfil.nombres" type="text" id="nomperf" name="#perfil.nombres" maxlength="200" required>
+            </div>
+            <!-- <div class="form-row col-12">
+                <div class="col-12 mb-3">
+                    <label for="depEmp">Departamento Empresa</label>
+                    <ng-select [items]="lsDepartamentoEmpresa" bindLabel="snombre" bindValue="iidDepartamentoEmpresa" placeholder="Seleccione Departamento Empresa" id="depEmp" name="#departamentoEmpresa.iidDepartamentoEmpresa" [(ngModel)]="departamentoEmpresa.iidDepartamentoEmpresa"
+                        style="width: 100%; margin-right: 10px;" required></ng-select>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="cerrar" (click)="close()" type="button" class="btn btn-warning btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+        <button type="button" id="continuar" class="btn btn-info btn-sm min" *ngIf="nuevoPerf.form.valid && validar" (click)="confirmarNuevaPagina()" style="margin: 0px 5px;">Continuar</button>
+    </div>
+</form>

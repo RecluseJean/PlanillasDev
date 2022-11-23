@@ -113,6 +113,10 @@ export class UsuarioService {
     return this.http.post(url, perfil)
   }
 
+  registrarPerfil(moduloDTO) {
+    return this.http.post(URL_SERVICIOSBACK + 'modulo/registrar/perfil', moduloDTO);
+  }
+
   listarPerfil() {
     return this.http.get(URL_SERVICIOSBACK + 'modulo/listarPerfiles');
   }

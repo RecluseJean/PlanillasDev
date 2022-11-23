@@ -26,6 +26,8 @@ import { ConfirmarGestionPaginasComponent } from './pages/paginas/modals/confirm
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GestionUtilitarioComponent } from './pages/utilitario/gestion-utilitario.component';
 import { MaterialModule } from '../../material.module';
+import { NuevoPerfilConfirmarComponent } from './pages/paginas/modals/nuevo-perfil-confirmar/nuevo-perfil-confirmar.component';
+import { NuevoPerfilComponent } from './pages/paginas/modals/nuevo-perfil/nuevo-perfil.component';
 
 @NgModule({
     imports:[
@@ -49,6 +51,8 @@ import { MaterialModule } from '../../material.module';
         GestionPaginasComponent,
         EditarGestionPaginasComponent,
         ConfirmarGestionPaginasComponent,
+        NuevoPerfilComponent,
+        NuevoPerfilConfirmarComponent
     ],
     entryComponents:[
         NuevoUsuarioComponent,
@@ -56,7 +60,9 @@ import { MaterialModule } from '../../material.module';
         NuevoPasswordComponent,
         NuevoPasswordConfirmarComponent,
         EditarGestionPaginasComponent,
-        ConfirmarGestionPaginasComponent
+        ConfirmarGestionPaginasComponent,
+        NuevoPerfilComponent,
+        NuevoPerfilConfirmarComponent
     ],
     providers:[
         {

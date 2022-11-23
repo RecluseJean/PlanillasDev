@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { EditarGestionPaginasComponent } from './modals/editar-gestion-paginas/editar-gestion-paginas.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { NuevoPerfilComponent } from './modals/nuevo-perfil/nuevo-perfil.component';
 
 @Component({
   selector: 'app-gestion-paginas',
@@ -15,7 +16,8 @@ export class GestionPaginasComponent implements OnInit {
 
   constructor(
     public modalService: NgbModal,
-    public _usuarioService: UsuarioService) { }
+    public _usuarioService: UsuarioService,
+    public activemodal: NgbActiveModal) { }
 
   modalRef: NgbModalRef;
   lsPerfile: any = null;
@@ -29,6 +31,12 @@ export class GestionPaginasComponent implements OnInit {
     this.listarPerfil();
   }
 
+  ngOnDestroy(): void {
+    if (this.modalRef != null) {
+      this.modalRef.close();
+    }
+  }
+
   listarPerfil() {
     this._usuarioService.listarPerfil().subscribe((resp: any) => {
       let lsPerfileFilter: Object[] = [];
@@ -36,6 +44,22 @@ export class GestionPaginasComponent implements OnInit {
       this.lsPerfile = new MatTableDataSource<Object>(lsPerfileFilter);
       this.lsPerfile.paginator = this.paginator;
     })
+  }
+
+  nuevoPerfil() {
+    let indice = null;
+    this.openModal(indice);
+  }
+
+  public openModal(indice) {
+
+    this.modalRef = this.modalService.open(NuevoPerfilComponent,
+      {
+        backdrop: 'static',
+        keyboard: false,
+        windowClass: 'modalMD'
+      })
+    this.modalRef.componentInstance.input_perfil_nuevo = indice;
   }
 
   gestionPaginas(perfil) {
