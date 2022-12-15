@@ -195,7 +195,7 @@ export class GestionVacacionesComponent implements OnInit {
         size: 'lg',
         windowClass: 'modal-mdC'
       })
-    modalRef.componentInstance.input_trabajador = indice.trabajador.idTrabajador;
+    modalRef.componentInstance.input_trabajador = indice.trabajador;
     modalRef.result.then((result) => {
     }, (reason) => {
     });

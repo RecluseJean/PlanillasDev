@@ -15,6 +15,7 @@ export class ListarVacacionesComponent implements OnInit {
   @Input() input_trabajador;
 
   idTrab: number = 0; 
+  datosTrabajador: string;
   listaDeTrabj: any;
 
   constructor(public activemodal: NgbActiveModal,
@@ -24,7 +25,9 @@ export class ListarVacacionesComponent implements OnInit {
               public _headerService: HeaderService) { }
 
   ngOnInit() {
-    this.idTrab = this.input_trabajador;
+    this.idTrab = this.input_trabajador.idTrabajador;
+    this.datosTrabajador = this.input_trabajador.apePater + " " + this.input_trabajador.apeMater + ", " + this.input_trabajador.nombres;
+    console.log(this.datosTrabajador);
     this.listarVacas();
   }
 

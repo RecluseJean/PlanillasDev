@@ -1,29 +1,35 @@
-<div class="modal-body">
+<div class="modal-header color-page-modal">
+    <h5 class="modal-title" style="color: white;">Lista de Vacaciones Tomadas por {{datosTrabajador}}</h5>
+</div>
+<div *ngIf="listaDeTrabj?.length==0" style="padding: 30px 0px;">
+    <div style="text-align: center; font-size: 18px; margin: 0px 50px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        No cuenta con una lista de vacaciones
+    </div>
+</div>
+<div *ngFor="let lista of listaDeTrabj; let i = index" style="margin: auto 8px;">
 
-    <div *ngFor="let lista of listaDeTrabj; let i = index">
-
-        <div class="row col-12"  style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 10px 5px;">
-            <div style="padding: 10px;">
-                <h4>VACACIÓN N° {{i+1}}</h4>
-            </div>
-            <div class="col-12" style="border: 1px solid #d6d6d6; padding:10px 5px; border-radius: 15px;">
-                <label class="col-3 col-form-label" style="text-align: left;">
-                    Fecha de Inicio :
-                </label>
-                <label class="col-3 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
-                    {{lista.fechaIni}}
-                </label>
-
-                <label class="col-3 col-form-label" style="text-align: right;">
-                    Fecha Final :
-                </label>
-                <label class="col-3 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
-                    {{lista.fechaFin}}
-                </label>
-            </div>
+    <div class="col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px; flex: 0 0 48%; margin: 10px auto;">
+        <div style="padding: 10px;">
+            <h4>VACACIÓN N° {{i+1}}</h4>
         </div>
 
+        <div class="col-12" style="border: 1px solid #d6d6d6; padding:10px 5px; border-radius: 15px;">
+            <label class="col-2 col-form-label" style="text-align: left;">
+                Fecha de Inicio :
+            </label>
+            <label class="col-2 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
+                {{lista.fechaIni}}
+            </label>
+
+            <label class="col-5 col-form-label" style="text-align: right;">
+                Fecha Final :
+            </label>
+            <label class="col-2 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
+                {{lista.fechaFin}}
+            </label>
+        </div>
     </div>
+
 </div>
 
 <div class=" modal-footer ">
