@@ -1,0 +1,31 @@
+<div class="modal-body">
+
+    <div *ngFor="let lista of listaDeTrabj; let i = index">
+
+        <div class="row col-12"  style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px;flex: 0 0 48%; margin: 10px 5px;">
+            <div style="padding: 10px;">
+                <h4>VACACIÓN N° {{i+1}}</h4>
+            </div>
+            <div class="col-12" style="border: 1px solid #d6d6d6; padding:10px 5px; border-radius: 15px;">
+                <label class="col-3 col-form-label" style="text-align: left;">
+                    Fecha de Inicio :
+                </label>
+                <label class="col-3 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
+                    {{lista.fechaIni}}
+                </label>
+
+                <label class="col-3 col-form-label" style="text-align: right;">
+                    Fecha Final :
+                </label>
+                <label class="col-3 col-form-label min" style="border:1px solid #d6d6d6; border-radius: 15px; text-align: left; color: gray;">
+                    {{lista.fechaFin}}
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cerrar</button>
+</div>

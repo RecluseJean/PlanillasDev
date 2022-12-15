@@ -60,6 +60,7 @@ import { PrestamoComponent } from './pages/prestamo/prestamo.component';
 import { MostrarPrestamoComponent } from './pages/prestamo/modals/mostrar-prestamo/mostrar-prestamo.component';
 import { RegistrarPrestamoComponent } from './pages/prestamo/modals/registrar-prestamo/registrar-prestamo.component';
 import { ConfirmarPrestamoComponent } from './pages/prestamo/modals/confirmar-prestamo/confirmar-prestamo.component';
+import { ListarVacacionesComponent } from './pages/gestion-vacaciones/modals/listar-vacaciones/listar-vacaciones.component';
 
 
 
@@ -114,6 +115,7 @@ import { ConfirmarPrestamoComponent } from './pages/prestamo/modals/confirmar-pr
     MostrarPrestamoComponent,
     RegistrarPrestamoComponent,
     ConfirmarPrestamoComponent,
+    ListarVacacionesComponent
   ],
   entryComponents: [
     CalculoPlanillaComponent,
@@ -139,7 +141,8 @@ import { ConfirmarPrestamoComponent } from './pages/prestamo/modals/confirmar-pr
     GestionSuspencionComponent,
     MostrarPrestamoComponent,
     RegistrarPrestamoComponent,
-    ConfirmarPrestamoComponent
+    ConfirmarPrestamoComponent,
+    ListarVacacionesComponent
   ],
   providers: [
       {

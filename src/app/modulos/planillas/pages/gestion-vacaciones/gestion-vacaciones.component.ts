@@ -12,6 +12,7 @@ import { AdelantarVacacionesComponent } from './modals/adelantar-vacaciones/adel
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { VacacionesService } from '../../services/vacaciones/vacaciones.service';
+import { ListarVacacionesComponent } from './modals/listar-vacaciones/listar-vacaciones.component';
 
 @Component({
   selector: 'app-gestion-vacaciones',
@@ -38,7 +39,8 @@ export class GestionVacacionesComponent implements OnInit {
     'apenom',
     'tomvac',
     'venvac',
-    'adelvac'
+    'adelvac',
+    'listvac'
   ];
 
   displayed2Columns: string[] = [
@@ -183,6 +185,20 @@ export class GestionVacacionesComponent implements OnInit {
       });
     }
 
+  }
+
+  abrirLista(indice) {
+    const modalRef = this.modalService.open(ListarVacacionesComponent,
+      {
+        backdrop: 'static',
+        keyboard: false,
+        size: 'lg',
+        windowClass: 'modal-mdC'
+      })
+    modalRef.componentInstance.input_trabajador = indice.trabajador.idTrabajador;
+    modalRef.result.then((result) => {
+    }, (reason) => {
+    });
   }
 
 
