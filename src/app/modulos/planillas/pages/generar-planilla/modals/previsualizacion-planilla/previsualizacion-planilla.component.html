@@ -85,7 +85,7 @@
                     <td class="text-center">
                         {{planilla_historica.contrato.fecInicio | date:'dd-MM-yyyy'}}
                     </td>
-                    <td class="text-center">{{planilla_historica.contrato.puesto.snombre}}</td>
+                    <td class="text-center">{{planilla_historica.contrato.puesto==null?"-":planilla_historica.contrato.puesto.snombre}}</td>
                     <td class="text-center">
                         {{planilla_historica.contrato.trabajador.afp ==null ? '-' : planilla_historica.contrato.trabajador.afp.descripcion }}
                     </td>

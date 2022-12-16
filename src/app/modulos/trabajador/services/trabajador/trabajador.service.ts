@@ -258,8 +258,8 @@ export class TrabajadorService {
       });
   }
 
-  listarTipoPlanillaPorCategoria(categoria){
-    return this.http.post(URL_SERVICIOSBACK +"tipoPlanilla/listarPorCategoria",categoria);
+  listarTipoPlanillaPorCategoria(categoria,IDEmpresa){
+    return this.http.post(URL_SERVICIOSBACK +"tipoPlanilla/listarPorCategoria/"+IDEmpresa,categoria);
   }
 
   //ruben

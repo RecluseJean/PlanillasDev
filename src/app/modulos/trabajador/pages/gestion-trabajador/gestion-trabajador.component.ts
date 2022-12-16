@@ -497,7 +497,7 @@ export class GestionTrabajadorComponent implements OnInit, OnDestroy {
   async escogerExcelMasivo(excel) {
       await this.alertCargando();
       var selecArch = excel.target.files[0];
-      debugger
+      
       this.trabajadorService.cargaExcelMasiva(selecArch).subscribe((resp: any) => {
         if (resp.estado == 1) {
           Swal.fire(Constantes.SUCCESS, "Carga masiva general realizada correctamente", "success");

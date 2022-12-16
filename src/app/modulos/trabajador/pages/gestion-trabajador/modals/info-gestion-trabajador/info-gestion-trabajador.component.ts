@@ -178,7 +178,7 @@ export class InfoGestionTrabajadorComponent implements OnInit, OnDestroy {
     } else {
       categoria = 4
     }
-    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria).subscribe((resp: any) => {
+    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria,this.empresa.idEmpresa).subscribe((resp: any) => {
       if (resp.estado == 1) {
         this.lsTipoPlanilla = resp.aaData;
       }

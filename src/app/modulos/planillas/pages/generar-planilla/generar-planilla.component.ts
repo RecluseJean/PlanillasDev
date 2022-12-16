@@ -31,6 +31,9 @@ import { TrabajadorService } from '../../../trabajador/services/trabajador/traba
   styles: []
 })
 export class GenerarPlanillaComponent implements OnInit, OnDestroy {
+  checkAction() {
+    throw new Error("Method not implemented.");
+  }
   @ViewChild('paginatorlsTrabajadorPlanilla', { static: true }) paginatorlsTrabajadorPlanilla: MatPaginator;
   @ViewChild('paginatorlsTrabajadorHonorario', { static: true }) paginatorlsTrabajadorHonorario: MatPaginator;
 
@@ -122,7 +125,7 @@ export class GenerarPlanillaComponent implements OnInit, OnDestroy {
     this.infoToken = JSON.parse(localStorage.getItem("InfoToken"));
     if (this.empresa != null) {
       this.guardarTardanzaLocal();
-      this.listarPorCategoria(4);
+      this.listarPorCategoria(4,this.empresa.idEmpresa);
 /*       this.listarTiposPlanillaPorPerfil();  */
       var tmpTipPlan = JSON.parse(localStorage.getItem("tipoPlanilla"));
       if (tmpTipPlan != null) {
@@ -172,7 +175,7 @@ export class GenerarPlanillaComponent implements OnInit, OnDestroy {
     }
   }
 
-  listarTiposPlanillaPorPerfil() { debugger
+  listarTiposPlanillaPorPerfil() { //debugger
     var empresaDTO = {
       "idPerfil": this.infoToken.id_perfil,
       "empresa": this.empresa
@@ -196,14 +199,14 @@ export class GenerarPlanillaComponent implements OnInit, OnDestroy {
     }else {
       categoria = 4
     }
-    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria).subscribe((resp: any) => {
+    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria,this.empresa.idEmpresa).subscribe((resp: any) => {
       if (resp.estado == 1) {
         this.lsTipoPlanilla = resp.aaData;
       }
     })
   }
-  listarPorCategoria(categoria){
-    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria).subscribe((resp: any) => {
+  listarPorCategoria(categoria,idEmp){
+    this.trabajadorService.listarTipoPlanillaPorCategoria(categoria,idEmp).subscribe((resp: any) => {
       if (resp.estado == 1) {
         this.lsTipoPlanilla = resp.aaData;
       }
