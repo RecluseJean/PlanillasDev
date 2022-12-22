@@ -22,6 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GenerarExcelComponent } from './modals/generar-excel/generar-excel.component';
 import { GestionSuspencionComponent } from './modals/gestion-suspencion/gestion-suspencion.component';
 import { TrabajadorService } from '../../../trabajador/services/trabajador/trabajador.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 
 
@@ -36,6 +37,7 @@ export class GenerarPlanillaComponent implements OnInit, OnDestroy {
   }
   @ViewChild('paginatorlsTrabajadorPlanilla', { static: true }) paginatorlsTrabajadorPlanilla: MatPaginator;
   @ViewChild('paginatorlsTrabajadorHonorario', { static: true }) paginatorlsTrabajadorHonorario: MatPaginator;
+  @ViewChild('ngSelectComponent',{ static: true }) ngSelectComponent: NgSelectComponent;
 
   constructor(
     public trabajadorService: TrabajadorService,
@@ -123,11 +125,29 @@ export class GenerarPlanillaComponent implements OnInit, OnDestroy {
     this.ano = JSON.parse(localStorage.getItem("anoSeleccion"));
     this.mes = JSON.parse(localStorage.getItem("mesSeleccion"));
     this.infoToken = JSON.parse(localStorage.getItem("InfoToken"));
-    if (this.empresa != null) {
+    if ((this.empresa != null && this.ano == null && this.mes == null)) {
+      this.cambiarTabs(4);
+      this.ngSelectComponent.clearModel();
       this.guardarTardanzaLocal();
-      this.listarPorCategoria(4,this.empresa.idEmpresa);
 /*       this.listarTiposPlanillaPorPerfil();  */
       var tmpTipPlan = JSON.parse(localStorage.getItem("tipoPlanilla"));
+      this.listarPorCategoria(tmpTipPlan.categoriaPlanilla,this.empresa.idEmpresa);
+      if (tmpTipPlan != null) {
+        if(tmpTipPlan.categoriaPlanilla == 5){
+          this.active4ta = "";
+          this.showAct4ta = "";
+          this.active5ta = "active";
+          this.showAct5ta = "show active";
+        }
+        this.tipoPlan = tmpTipPlan;
+        this.listarTrabajadoresPorTipoPlanilla()
+      }
+    }
+    else {
+      this.guardarTardanzaLocal();
+/*       this.listarTiposPlanillaPorPerfil();  */
+      var tmpTipPlan = JSON.parse(localStorage.getItem("tipoPlanilla"));
+      this.listarPorCategoria(tmpTipPlan.categoriaPlanilla,this.empresa.idEmpresa);
       if (tmpTipPlan != null) {
         if(tmpTipPlan.categoriaPlanilla == 5){
           this.active4ta = "";
