@@ -2,7 +2,7 @@
 <nav [hidden]="empresa==null">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active color-page-i" (click)="mostrarPlanilla=true" id="nav-planilla-tab" data-toggle="tab" href="#nav-planilla" role="tab" aria-controls="nav-planilla" aria-selected="true" style="font-size: 13px; font-weight: bold;">Planillas</a>
-        <a class="nav-item nav-link color-page-i" (click)="mostrarPlanilla=false" id="nav-honorario-tab" data-toggle="tab" href="#nav-honorario" role="tab" aria-controls="nav-honorario" aria-selected="false" style="font-size: 13px; font-weight: bold;">Recibos Por Honorarios</a>
+        <a class="nav-item nav-link color-page-i" (click)="mostrarPlanilla=false" *ngIf="false" id="nav-honorario-tab" data-toggle="tab" href="#nav-honorario" role="tab" aria-controls="nav-honorario" aria-selected="false" style="font-size: 13px; font-weight: bold;">Recibos Por Honorarios</a>
     </div>
 </nav>
 <div [hidden]="empresa!=null">
