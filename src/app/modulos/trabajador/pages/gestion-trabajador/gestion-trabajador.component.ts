@@ -500,7 +500,7 @@ export class GestionTrabajadorComponent implements OnInit, OnDestroy {
       
       this.trabajadorService.cargaExcelMasiva(selecArch).subscribe((resp: any) => {
         if (resp.estado == 1) {
-          Swal.fire(Constantes.SUCCESS, "Carga masiva general realizada correctamente", "success");
+          Swal.fire(Constantes.SUCCESS, resp.msg, "success");
         } else if (resp.estado == 0) {
           Swal.fire(Constantes.INFO, resp.msg, "info");
         } else { Swal.fire(Constantes.ERROR, resp.msg, "error"); }
