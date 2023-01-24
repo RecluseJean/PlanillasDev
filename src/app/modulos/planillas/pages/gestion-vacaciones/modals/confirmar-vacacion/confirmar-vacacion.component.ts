@@ -41,6 +41,11 @@ export class ConfirmarVacacionComponent implements OnInit {
         this.activemodal.close('succes');
         this.refrescar(this.router.url);
       }
+      else{
+        Swal.fire(Constantes.INFO,resp.msg,'info');
+        this.activemodal.close('succes');
+        this.refrescar(this.router.url);
+      }
     })
   }
 
@@ -50,6 +55,11 @@ export class ConfirmarVacacionComponent implements OnInit {
         Swal.fire(Constantes.SUCCESS,resp.msg,'success');
         this.activemodal.close('succes');
         this.refrescar(this.router.url);
+      }
+      else {
+        Swal.fire(Constantes.ERROR,resp.msg,'error');
+        this.activemodal.close('error');
+        //this.refrescar(this.router.url);
       }
     })
   }
