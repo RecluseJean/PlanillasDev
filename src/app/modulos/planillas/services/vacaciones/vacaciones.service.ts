@@ -13,6 +13,10 @@ export class VacacionesService {
     return this.http.post(URL_SERVICIOSBACK + 'vacaciones/listarPorTrabajador', trab);
   }
 
+  listarVacaciones(idVacacion){
+    return this.http.get(URL_SERVICIOSBACK + 'vacaciones/listarPorIdVacacion/'+idVacacion);
+  }
+
   listarVacasTomadPorTrabajador(idTrab) {
     return this.http.get(URL_SERVICIOSBACK + 'vacaciones/listarVacacionesTomadasPorTrabajador/'+idTrab);
   }

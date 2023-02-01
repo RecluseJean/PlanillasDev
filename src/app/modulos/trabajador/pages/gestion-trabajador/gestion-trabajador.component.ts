@@ -397,7 +397,7 @@ export class GestionTrabajadorComponent implements OnInit, OnDestroy {
 
   }
 
-  public openModal(indice) {debugger
+  public openModal(indice) {//debugger
     switch (indice.accion) {
       case 'U': this.modalRef = this.modalService.open(NuevoGestionTrabajadorComponent,
         {

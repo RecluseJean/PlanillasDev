@@ -12,7 +12,7 @@
     </div>
     <div class="col-2">
     <!-- [disabled]="nuevotrab.form.invalid" -->
-        <button *ngIf="ver" type="button"  id="confirmar" class="btn btn-info btn-sm min " (click)="confirmarNuevoTrabajador() " style="margin-top: 10px; font-size: 15px; padding: 5px 10px;">Actualizar</button>
+        <button *ngIf="ver" type="button"  id="confirmar" class="btn btn-info btn-sm min " (click)="confirmarNuevoTrabajador() " [disabled]="nuevotrab.form.invalid" style="margin-top: 10px; font-size: 15px; padding: 5px 10px;">Actualizar</button>
     </div>
     <div class="col-1">
         <i *ngIf="!ver" (click)="ver = !ver" class="mdi mdi-lock float-right" style="font-size: 35px; margin-top: 5px; color: red;"></i>
@@ -229,8 +229,8 @@
                             <div class="card-body">
                                 <div class="form-row col-12">
                                     <div class="col-10 mb-3" *ngIf="tipoComprob==1">
-                                        <label for="regl">Regimen Laboral</label>
-                                        <ng-select [disabled]="!ver" [items]="lsRegLaboral" bindLabel="descripcion" bindValue="idRegLaboral" placeholder="Regimen Laboral" id="regl" [(ngModel)]="reglabo" name="#reglabo" style="width: 100%; margin-right: 10px;"></ng-select>
+                                        <label for="regl">Regimen Laboral *</label>
+                                        <ng-select [disabled]="!ver" [items]="lsRegLaboral" bindLabel="descripcion" bindValue="idRegLaboral" placeholder="Regimen Laboral" id="regl" [(ngModel)]="reglabo" name="#reglabo" style="width: 100%; margin-right: 10px;" required></ng-select>
                                     </div>
                                 </div>
                                 <div class="form-row col-12">

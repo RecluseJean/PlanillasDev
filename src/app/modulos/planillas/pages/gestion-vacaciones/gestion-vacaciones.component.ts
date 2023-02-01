@@ -39,8 +39,7 @@ export class GestionVacacionesComponent implements OnInit {
     'apenom',
     'tomvac',
     'venvac',
-    'adelvac',
-    'listvac'
+    'adelvac'
   ];
 
   displayed2Columns: string[] = [

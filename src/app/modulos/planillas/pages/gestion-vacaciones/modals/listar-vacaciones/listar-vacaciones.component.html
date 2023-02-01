@@ -1,12 +1,12 @@
 <div class="modal-header color-page-modal">
     <h5 class="modal-title" style="color: white;">Lista de Vacaciones Tomadas por {{datosTrabajador}}</h5>
 </div>
-<div *ngIf="listaDeTrabj?.length==0" style="padding: 30px 0px;">
+<div *ngIf="listaDeVaca?.length==0" style="padding: 30px 0px;">
     <div style="text-align: center; font-size: 18px; margin: 0px 50px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
-        No cuenta con una lista de vacaciones
+        No cuenta con Vacaciones Tomadas
     </div>
 </div>
-<div *ngFor="let lista of listaDeTrabj; let i = index" style="margin: auto 8px;">
+<div *ngFor="let lista of listaDeVaca; let i = index" style="margin: auto 8px;">
 
     <div class="col-12" style="border:1px solid #d6d6d6; border-radius: 15px; padding: 10px; flex: 0 0 48%; margin: 10px auto;">
         <div style="padding: 10px;">

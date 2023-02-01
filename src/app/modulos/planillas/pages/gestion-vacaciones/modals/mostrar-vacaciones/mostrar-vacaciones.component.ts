@@ -5,6 +5,7 @@ import { VacacionesService } from '../../../../services/vacaciones/vacaciones.se
 import { ThrowStmt } from '@angular/compiler';
 import { TomarVacacionesComponent } from '../tomar-vacaciones/tomar-vacaciones.component';
 import { VenderVacacionesComponent } from '../vender-vacaciones/vender-vacaciones.component';
+import { ListarVacacionesComponent } from '../listar-vacaciones/listar-vacaciones.component';
 
 @Component({
   selector: 'app-mostrar-vacaciones',
@@ -78,6 +79,20 @@ export class MostrarVacacionesComponent implements OnInit {
         });
     };break;
     }
+  }
+
+  abrirLista(indice) {
+    const modalRef = this.modalService.open(ListarVacacionesComponent,
+      {
+        backdrop: 'static',
+        keyboard: false,
+        size: 'lg',
+        windowClass: 'modal-mdC'
+      })
+    modalRef.componentInstance.input_trabajador = indice;
+    modalRef.result.then((result) => {
+    }, (reason) => {
+    });
   }
 
 }

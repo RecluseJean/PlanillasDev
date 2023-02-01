@@ -47,8 +47,8 @@
                             <button *ngIf="tipoPlan.categoriaPlanilla == 4" [disabled]="lsTrabajadorHonorario?.length == 0" class="btn btn-sm color-page-button" (click)="generarTxtGeneral()" id="gentxt" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Generar Archivo General</button>
                             <!-- <input *ngIf="tipoPlan.categoriaPlanilla == 4" class="form-control form-control-sm input-button-z" type="file" id="subir" (change)="escogerArchivo($event)" accept="text/plain" style="width:115px"> -->
                             <input type="file" id="subir" (change)="escogerArchivoRheGeneral($event)" accept="text/plain" class="form-control form-control-sm input-button-z" style="width: 120px;">
-                            <button *ngIf="tipoPlan.categoriaPlanilla == 4" [disabled]="lsTrabajadorHonorario?.length == 0" type="button" class="btn btn-sm color-page-button" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Cargas masiva RHE</button>
                             <button *ngIf="tipoPlan.categoriaPlanilla == 4" class="btn btn-sm color-page-button" (click)="xlsConsolidado()" id="genxlscons" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Consolidado Nomina{{tipoPlan == null?'':tipoPlan.categoriaPlanilla==4?' 4ta':' 5ta'}}</button>
+                            <button *ngIf="tipoPlan.categoriaPlanilla == 4" [disabled]="lsTrabajadorHonorario?.length == 0" type="button" class="btn btn-sm color-page-button" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Cargas masiva RHE</button>
                         </div>
                     </div>
 
@@ -267,8 +267,8 @@
                     <div class="col-6" style="margin-left: -40px;">
                         <div *ngIf="tipoPlan != null">
                             <button *ngIf="tipoPlan.categoriaPlanilla == 5" [disabled]="lsTrabajadorPlanilla?.length == 0" class="btn btn-sm color-page-button" id="genPlanMasiva" (click)="calcularPlanillaMasiva()" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Generar Planilla Masiva</button>
-                            <button *ngIf="tipoPlan.categoriaPlanilla == 5" [disabled]="lsTrabajadorHonorario?.length == 0" class="btn btn-sm color-page-button" (click)="generarTxtGeneral()" id="gentxt" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Generar Archivo General</button>
                             <button *ngIf="tipoPlan.categoriaPlanilla == 5" class="btn btn-sm color-page-button" (click)="xlsConsolidado()" id="genxlscons" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Consolidado Nomina{{tipoPlan == null?'':tipoPlan.categoriaPlanilla==4?' 4ta':' 5ta'}}</button>
+                            <button *ngIf="tipoPlan.categoriaPlanilla == 5" [disabled]="lsTrabajadorHonorario?.length == 0" class="btn btn-sm color-page-button" (click)="generarTxtGeneral()" id="gentxt" style="width: auto; border-radius: 28px; color: white; margin-top: 20px; margin-left: 20px;">Generar Archivo General</button>
                         </div>
                     </div>
 

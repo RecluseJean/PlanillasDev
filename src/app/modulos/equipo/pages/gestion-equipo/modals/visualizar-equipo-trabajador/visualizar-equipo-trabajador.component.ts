@@ -33,7 +33,7 @@ export class VisualizarEquipoTrabajadorComponent implements OnInit {
   lsTrabajadorEquipo: any [] = [];
   objEquipo: any = null;
 
-  ngOnInit() {debugger
+  ngOnInit() {//debugger
     this.listarTrabajadoresEquipo();
     this.equipo = this.input_equipo;
   }

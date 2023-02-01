@@ -193,8 +193,8 @@
                             <div class="card-body">
                                 <div class="form-row col-12">
                                     <div class="col-10 mb-3" *ngIf="tipoComprob==1">
-                                        <label for="regl">Regimen Laboral</label>
-                                        <ng-select [items]="lsRegLaboral" bindLabel="descripcion" bindValue="idRegLaboral" placeholder="Regimen Laboral" id="regl" [(ngModel)]="reglabo" name="#reglabo" style="width: 100%; margin-right: 10px;"></ng-select>
+                                        <label for="regl">Regimen Laboral *</label>
+                                        <ng-select [items]="lsRegLaboral" bindLabel="descripcion" bindValue="idRegLaboral" placeholder="Regimen Laboral" id="regl" [(ngModel)]="reglabo" name="#reglabo" [ngClass]="{'has-error':!validartpcl}" style="width: 100%; margin-right: 10px;" required></ng-select>
                                     </div>
                                 </div>
                                 <div class="form-row col-12">
